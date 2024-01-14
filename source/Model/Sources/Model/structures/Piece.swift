@@ -8,12 +8,12 @@
 import Foundation
 
 public struct Piece {
-    let owner : Owner
-    let animal : Animal
+    public let owner : Owner
+    public let animal : Animal
     
-    var description : String { "[\(self.owner.rawValue):\(self.animal)]" }
+    public var description : String { "[\(self.owner.rawValue):\(self.animal)]" }
     
-    init(owner: Owner, animal: Animal) {
+    public init(owner: Owner, animal: Animal) {
         self.owner = owner
         self.animal = animal
     }

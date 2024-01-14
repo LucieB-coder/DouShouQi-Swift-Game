@@ -1,7 +1,6 @@
-
 //
-//  CellTypeExtension.swift
-//
+//  CellType.swift
+//  
 //
 //  Created by etudiant on 14/01/2024.
 //
@@ -9,7 +8,7 @@
 import Foundation
 import Model
 
-public extension CellType {
+extension CellType {
     var displaySymbol: String {
         switch self {
         case .unknown: return " "

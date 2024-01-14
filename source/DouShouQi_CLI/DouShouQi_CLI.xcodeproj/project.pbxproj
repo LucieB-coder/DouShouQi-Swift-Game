@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC738FD32B5490CF004AB6AE /* ModelEmojiDisplay in Frameworks */ = {isa = PBXBuildFile; productRef = EC738FD22B5490CF004AB6AE /* ModelEmojiDisplay */; };
 		ECCF15702B514F6C00F27E3F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCF156F2B514F6C00F27E3F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,17 +33,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC738FD32B5490CF004AB6AE /* ModelEmojiDisplay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC738FD12B5490CF004AB6AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ECCF15632B514F6C00F27E3F = {
 			isa = PBXGroup;
 			children = (
 				ECCF156E2B514F6C00F27E3F /* DouShouQi_CLI */,
 				ECCF156D2B514F6C00F27E3F /* Products */,
+				EC738FD12B5490CF004AB6AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +88,9 @@
 			dependencies = (
 			);
 			name = DouShouQi_CLI;
+			packageProductDependencies = (
+				EC738FD22B5490CF004AB6AE /* ModelEmojiDisplay */,
+			);
 			productName = DouShouQi_CLI;
 			productReference = ECCF156C2B514F6C00F27E3F /* DouShouQi_CLI */;
 			productType = "com.apple.product-type.tool";
@@ -285,6 +298,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC738FD22B5490CF004AB6AE /* ModelEmojiDisplay */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ModelEmojiDisplay;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECCF15642B514F6C00F27E3F /* Project object */;
 }

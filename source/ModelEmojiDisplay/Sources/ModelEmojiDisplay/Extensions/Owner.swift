@@ -1,5 +1,5 @@
 //
-//  OwnerExtension.swift
+//  Owner.swift
 //
 //
 //  Created by etudiant on 14/01/2024.
@@ -8,7 +8,7 @@
 import Foundation
 import Model
 
-public extension Owner {
+extension Owner {
     var displaySymbol: String {
         switch self {
         case .noOne: return " "

@@ -8,11 +8,11 @@
 import Foundation
 
 public struct Board {
-    let nbRows : Int
-    let nbColumns : Int
-    private(set) var grid : [[Cell]]
+    public let nbRows : Int
+    public let nbColumns : Int
+    private(set) public var grid : [[Cell]]
     
-    init?(grid: [[Cell]]) {
+    public init?(grid: [[Cell]]) {
         let rowSizes = Set(grid.map { $0.count })
         guard rowSizes.count == 1 else {
             // Rows have different sizes
