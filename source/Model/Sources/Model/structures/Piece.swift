@@ -11,7 +11,7 @@ struct Piece {
     let owner : Owner
     let animal : Animal
     
-    var descripion : String { "[\(self.owner.rawValue):\(self.animal)]" }
+    var description : String { "[\(self.owner.rawValue):\(self.animal)]" }
     
     init(owner: Owner, animal: Animal) {
         self.owner = owner

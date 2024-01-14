@@ -13,7 +13,7 @@ struct Cell {
     let piece : Piece?
     
     var description : String {
-        "\(self.piece == nil ? self.piece?.descripion : "ø") on \(self.cellType), \(self.initialOwner.rawValue)"
+        "\(self.piece?.description ?? "ø") on \(self.cellType), \(self.initialOwner.rawValue)"
     }
     
     init(cellType: CellType, initialOwner: Owner, piece: Piece?) {
