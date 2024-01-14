@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Piece {
+public struct Piece {
     let owner : Owner
     let animal : Animal
     

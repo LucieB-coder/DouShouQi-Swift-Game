@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Board {
+public struct Board {
     let nbRows : Int
     let nbColumns : Int
     private(set) var grid : [[Cell]]

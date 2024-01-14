@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Owner : String {
+public enum Owner : String {
     case player1 = "1"
     case player2 = "2"
     case noOne = "x"

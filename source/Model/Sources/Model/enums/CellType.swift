@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CellType {
+public enum CellType {
     case jungle
     case water
     case trap

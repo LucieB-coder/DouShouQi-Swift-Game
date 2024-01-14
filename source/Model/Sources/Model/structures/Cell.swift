@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Cell {
+public struct Cell {
     let cellType: CellType
     let initialOwner : Owner
     let piece : Piece?
