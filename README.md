@@ -10,7 +10,7 @@ Here is Mr Chevaldonné' citerias table with a check of everything i did for thi
  niveau |	description	 | status |	coeff | pénalités TP2 |	pénalités TP3 
 ---|---|---|---|---|---
 ☢️ | Le dépôt doit être accessible par l'enseignant | | ☢️ | | 
-☢️ | un .gitignore doit exister au premier push | | ☢️ | | 
+☢️ | un .gitignore doit exister au premier push |✅| ☢️ | | 
 🎬 | les Packages et le test compilent | 🟡 | 4 | 50% | 75% 
 🎬 | le test s'exécute sans bug | 🟡 | 4 | 50% | 75% 
 3️⃣ | tous mes projets sont dans le même workspace | 🟡 | 2 | 50% | 75% 
@@ -39,7 +39,7 @@ Here is Mr Chevaldonné' citerias table with a check of everything i did for thi
 2️⃣|j'ai créé une application de type Command Line Tool utilisant les deux Packages précédents|🟡|2|50%|75%
 2️⃣|j'initialise correctement Board dans le test|🟡|2|50%|75%
 3️⃣|j'affiche correctement Board dans le test|🟡|1|50%|75%
-3️⃣|mon dépôt possède un readme qui apporte quelque chose...|🟡|2|50%|75%
+3️⃣|mon dépôt possède un readme qui apporte quelque chose...|✅|2|50%|75%
 3️⃣|mon code est commenté||1|50%|75%
 
 Enjoy the game (well, the grid at least).
