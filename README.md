@@ -1,11 +1,11 @@
 # DouShouQi-SwiftGame
 
-This project is a DouShouQi game coded in swift and usable in your terminal.
-So far, only the board of the game is code, the rest will follow soon.
+This project is a DouShouQi command line game coded in swift and usable in your terminal.
+So far, only the board of the game is coded, the rest will follow soon.
 
 To launch the project, open the `xcworkspace` file in XCode and run the project `DouShouQi_CLI`.
 
-Here is Mr Chevaldonné' citerias table with a chack of everything i did for this TP
+Here is Mr Chevaldonné' citerias table with a check of everything i did for this TP
 
  niveau |	description	 | status |	coeff | pénalités TP2 |	pénalités TP3 
 ---|---|---|---|---|---
