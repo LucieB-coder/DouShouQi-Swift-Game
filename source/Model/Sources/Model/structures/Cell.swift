@@ -13,7 +13,7 @@ public struct Cell : CustomStringConvertible {
     public let piece : Piece?
     
     public var description : String {
-        "\(self.piece?.description ?? "ø") on \(self.cellType), \(self.initialOwner.description)"
+        "\(self.piece?.description ?? "ø") on \(self.cellType), \(self.initialOwner)"
     }
     
     public init(cellType: CellType, initialOwner: Owner = .noOne, piece: Piece? = nil) {

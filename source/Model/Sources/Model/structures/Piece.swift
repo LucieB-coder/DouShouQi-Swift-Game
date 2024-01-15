@@ -11,7 +11,7 @@ public struct Piece : CustomStringConvertible {
     public let owner : Owner
     public let animal : Animal
     
-    public var description : String { "[\(self.owner.description):\(self.animal)]" }
+    public var description : String { "[\(self.owner):\(self.animal)]" }
     
     public init(owner: Owner, animal: Animal) {
         self.owner = owner

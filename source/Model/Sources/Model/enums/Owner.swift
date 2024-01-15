@@ -15,9 +15,9 @@ public enum Owner : String, CustomStringConvertible {
     
     public var description: String {
         switch self {
-        case .player1: return "1"
-        case .player2: return "2"
-        case .noOne: return "x"
+            case .player1: return "1"
+            case .player2: return "2"
+            case .noOne: return "x"
         }
     }
 }
