@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ModelEmojiDisplay">
+      location = "group:ModelEmojiDisplayer">
    </FileRef>
    <FileRef
       location = "group:DouShouQi_CLI/DouShouQi_CLI.xcodeproj">

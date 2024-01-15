@@ -7,7 +7,7 @@
 
 import Foundation
 import Model
-import ModelEmojiDisplay
+import ModelEmojiDisplayer
 
 print("Hello, World!")
 
@@ -97,25 +97,3 @@ let grid: [[Cell]] = [
 let board = Board(grid: grid)
 
 print(board?.displayBoard() ?? "error init board")
-
-/*
-🌿🦁🟡  🌿      🪤      🪹      🪤      🌿      🌿🐯🟡
-
-🌿     🌿🐶🟡   🌿      🪤      🌿      🌿🐱🟡   🌿
-
-🌿🐭🟡  🌿      🌿🐆🟡   🌿      🌿🐺🟡   🌿       🌿🐘🟡
-
-🌿      💧      💧      🌿      💧      💧      🌿
-
-🌿      💧      💧      🌿      💧      💧      🌿
-
-🌿      💧      💧      🌿      💧      💧      🌿
-
-🌿      💧      💧      🌿      💧      💧      🌿
-
-🌿🐘🔴   🌿      🌿🐺🔴  🌿      🌿🐆🔴   🌿      🌿🐭🔴
-
-🌿      🌿🐱🔴   🌿      🪤      🌿      🌿🐶🔴  🌿
-
-🌿🐯🔴   🌿      🪤      🪹      🪤      🌿      🌿🦁🔴
-*/

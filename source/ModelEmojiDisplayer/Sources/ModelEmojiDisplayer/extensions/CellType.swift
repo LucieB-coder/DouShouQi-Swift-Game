@@ -2,14 +2,14 @@
 //  CellType.swift
 //  
 //
-//  Created by etudiant on 14/01/2024.
+//  Created by etudiant on 15/01/2024.
 //
 
 import Foundation
 import Model
 
-extension CellType {
-    var displaySymbol: String {
+public extension CellType {
+    var symbol: String {
         switch self {
         case .unknown: return " "
         case .jungle: return "🌿"

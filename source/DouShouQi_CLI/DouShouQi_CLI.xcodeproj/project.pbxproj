@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC738FD32B5490CF004AB6AE /* ModelEmojiDisplay in Frameworks */ = {isa = PBXBuildFile; productRef = EC738FD22B5490CF004AB6AE /* ModelEmojiDisplay */; };
+		EC835AF62B552FE7009D29E0 /* ModelEmojiDisplayer in Frameworks */ = {isa = PBXBuildFile; productRef = EC835AF52B552FE7009D29E0 /* ModelEmojiDisplayer */; };
+		EC835AF82B5530B3009D29E0 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = EC835AF72B5530B3009D29E0 /* Model */; };
 		ECCF15702B514F6C00F27E3F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCF156F2B514F6C00F27E3F /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC738FD32B5490CF004AB6AE /* ModelEmojiDisplay in Frameworks */,
+				EC835AF82B5530B3009D29E0 /* Model in Frameworks */,
+				EC835AF62B552FE7009D29E0 /* ModelEmojiDisplayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +91,8 @@
 			);
 			name = DouShouQi_CLI;
 			packageProductDependencies = (
-				EC738FD22B5490CF004AB6AE /* ModelEmojiDisplay */,
+				EC835AF52B552FE7009D29E0 /* ModelEmojiDisplayer */,
+				EC835AF72B5530B3009D29E0 /* Model */,
 			);
 			productName = DouShouQi_CLI;
 			productReference = ECCF156C2B514F6C00F27E3F /* DouShouQi_CLI */;
@@ -300,9 +303,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EC738FD22B5490CF004AB6AE /* ModelEmojiDisplay */ = {
+		EC835AF52B552FE7009D29E0 /* ModelEmojiDisplayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = ModelEmojiDisplay;
+			productName = ModelEmojiDisplayer;
+		};
+		EC835AF72B5530B3009D29E0 /* Model */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Model;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

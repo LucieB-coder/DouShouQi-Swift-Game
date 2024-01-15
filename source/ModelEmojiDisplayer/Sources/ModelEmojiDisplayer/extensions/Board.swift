@@ -1,8 +1,8 @@
 //
 //  Board.swift
+//  
 //
-//
-//  Created by etudiant on 14/01/2024.
+//  Created by etudiant on 15/01/2024.
 //
 
 import Foundation
@@ -16,7 +16,7 @@ public extension Board {
         for row in board.grid {
                 for cell in row {
                     display += "\t"
-                    display += "\(cell.cellType.displaySymbol)\(cell.piece?.animal.displaySymbol ?? " ")\(cell.piece?.owner.displaySymbol ?? " ")\t"
+                    display += "\(cell.cellType.symbol)\(cell.piece?.animal.symbol ?? " ")\(cell.piece?.owner.symbol ?? " ")\t"
                 }
                 display += "\n\n"
             }

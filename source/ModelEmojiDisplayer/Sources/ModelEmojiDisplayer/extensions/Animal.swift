@@ -2,14 +2,14 @@
 //  Animal.swift
 //
 //
-//  Created by etudiant on 14/01/2024.
+//  Created by etudiant on 15/01/2024.
 //
 
 import Foundation
 import Model
 
-extension Animal {
-    var displaySymbol: String {
+public extension Animal {
+    var symbol: String {
         switch self {
         case .rat: return "🐭"
         case .cat: return "🐱"
