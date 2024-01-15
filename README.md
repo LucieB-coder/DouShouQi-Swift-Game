@@ -96,7 +96,7 @@ Here is Mr Chevaldonné' citerias table with a check of everything I did for thi
 
  niveau |	description	 | status |	coeff | pénalités TP2 |	pénalités TP3 
 ---|---|---|---|---|---
-☢️ | Le dépôt doit être accessible par l'enseignant | | ☢️ | | 
+☢️ | Le dépôt doit être accessible par l'enseignant |✅| ☢️ | | 
 ☢️ | un .gitignore doit exister au premier push |✅| ☢️ | | 
 🎬 | les Packages et le test compilent | ✅ | 4 | 50% | 75% 
 🎬 | le test s'exécute sans bug | ✅ | 4 | 50% | 75% 
