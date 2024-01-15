@@ -7,16 +7,16 @@
 
 import Foundation
 
-public struct Cell {
+public struct Cell : CustomStringConvertible {
     public let cellType: CellType
     public let initialOwner : Owner
     public let piece : Piece?
     
     public var description : String {
-        "\(self.piece?.description ?? "ø") on \(self.cellType), \(self.initialOwner.rawValue)"
+        "\(self.piece?.description ?? "ø") on \(self.cellType), \(self.initialOwner.description)"
     }
     
-    public init(cellType: CellType, initialOwner: Owner, piece: Piece?) {
+    public init(cellType: CellType, initialOwner: Owner = .noOne, piece: Piece? = nil) {
         self.cellType = cellType
         self.initialOwner = initialOwner
         self.piece = piece

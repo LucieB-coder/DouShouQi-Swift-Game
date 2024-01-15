@@ -96,4 +96,4 @@ let grid: [[Cell]] = [
 
 let board = Board(grid: grid)
 
-print(board?.displayBoard() ?? "error init board")
+print(board?.description ?? "error initializing board")

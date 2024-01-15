@@ -8,19 +8,21 @@
 import Foundation
 import Model
 
-public extension Board {
-    func displayBoard() -> String {
+extension Board : CustomStringConvertible {
+    func boardDisplay() -> String {
         var display = ""
         let board : Board = self
 
         for row in board.grid {
-                for cell in row {
-                    display += "\t"
-                    display += "\(cell.cellType.symbol)\(cell.piece?.animal.symbol ?? " ")\(cell.piece?.owner.symbol ?? " ")\t"
-                }
-                display += "\n\n"
+            for cell in row {
+                display += "\t"
+                display += "\(cell.cellType.symbol)\(cell.piece?.animal.symbol ?? " ")\(cell.piece?.owner.symbol ?? " ")\t"
             }
-
-            return display
+            display += "\n\n"
         }
+
+        return display
+    }
+    
+    public var description: String { boardDisplay() }
 }
