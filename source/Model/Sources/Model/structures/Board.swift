@@ -36,5 +36,10 @@ public struct Board {
         // $1 is the current row, which we filter to find the pieces of the owner and on which we execute a count action
         return grid.reduce(0) { $0 + $1.filter { $0.piece?.owner == owner }.count }
     }
+    
+    public func countPieces() -> (player1: Int, player2: Int) {
+        // We call the previous method for both players and return it in a tuple
+        return (player1: countPieces(of: .player1), player2: countPieces(of: .player2))
+    }
 }
 

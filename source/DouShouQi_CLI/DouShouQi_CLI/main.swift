@@ -9,7 +9,7 @@ import Foundation
 import Model
 import ModelEmojiDisplayer
 
-
+// Grid for board declaration
 let grid: [[Cell]] = [
     [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .lion)),
      Cell(cellType: .jungle),
@@ -93,7 +93,14 @@ let grid: [[Cell]] = [
     
 ]
 
+// Test board display
 let board = Board(grid: grid)
-
 print(board ?? "error initializing board")
-print ("count piece for player1 (should be 8) : \(board?.countPieces(of: .player1) ?? 0)")
+
+// Count pieces of player 1
+// print ("count piece of player1 (should be 8) : \(board?.countPieces(of: .player1) ?? 0)")
+
+// Count pieces for both players
+let allPieceCounts = board?.countPieces()
+print("count piece of player1 (should be 8) : \(allPieceCounts?.player1 ?? 0)")
+print("count piece of player2 (should be 8) : \(allPieceCounts?.player2 ?? 0)")
