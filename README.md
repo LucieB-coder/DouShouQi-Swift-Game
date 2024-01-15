@@ -24,22 +24,22 @@ Here is Mr Chevaldonné' citerias table with a check of everything i did for thi
 3️⃣ | Piece est transformable en String comme demandé | ✅ | 1 | 50% | 75% 
 1️⃣ | Cell possède bien les propriétés demandées en lecture seule non-modifiables|✅|1|50%|75%
 1️⃣|Cell possède bien une propriété piece pouvant ne pas avoir de valeur|✅|2|50%|75%
-1️⃣|Cell possède un initialiseur utilisant des valeurs par défaut pour deux paramètres|🟡|2|50%|75%
+1️⃣|Cell possède un initialiseur utilisant des valeurs par défaut pour deux paramètres|✅|2|50%|75%
 3️⃣|Cell est transformable en String comme demandé|✅|1|50%|75%
 1️⃣|Board possède bien les propriétés demandées en lecture seule non-modifiables|✅|1|50%|75%
 1️⃣|Board possède bien un tableau à deux dimensions de cellule|✅|2|50%|75%
 2️⃣|Board.grid est en lecture seule mais modifiable au sein de Board|✅|2|50%|75%|
 1️⃣|Board possède un initialiseur permettant d'initialiser toutes ses propriétés|✅|2|50%|75%
-2️⃣|l'initialiseur de Board vérifie les contraintes et renvoie nil si nécessaire|🟡|3|50%|75%
-3️⃣|j'ai créé un Package avec les extensions pour l'affichage en lignes de commande|🟡|2|50%|75%
-3️⃣|j'ai créé une extensions pour CellType|🟡|1|50%|75%
-3️⃣|j'ai créé une extensions pour Animal|🟡|1|50%|75%
-3️⃣|j'ai créé une extensions pour Owner|🟡|1|50%|75%
-3️⃣|j'ai créé une extensions pour Board|🟡|2|50%|75%
-2️⃣|j'ai créé une application de type Command Line Tool utilisant les deux Packages précédents|🟡|2|50%|75%
-2️⃣|j'initialise correctement Board dans le test|🟡|2|50%|75%
-3️⃣|j'affiche correctement Board dans le test|🟡|1|50%|75%
+2️⃣|l'initialiseur de Board vérifie les contraintes et renvoie nil si nécessaire|✅|3|50%|75%
+3️⃣|j'ai créé un Package avec les extensions pour l'affichage en lignes de commande|✅|2|50%|75%
+3️⃣|j'ai créé une extensions pour CellType|✅|1|50%|75%
+3️⃣|j'ai créé une extensions pour Animal|✅|1|50%|75%
+3️⃣|j'ai créé une extensions pour Owner|✅|1|50%|75%
+3️⃣|j'ai créé une extensions pour Board|✅|2|50%|75%
+2️⃣|j'ai créé une application de type Command Line Tool utilisant les deux Packages précédents|✅|2|50%|75%
+2️⃣|j'initialise correctement Board dans le test|✅|2|50%|75%
+3️⃣|j'affiche correctement Board dans le test|✅|1|50%|75%
 3️⃣|mon dépôt possède un readme qui apporte quelque chose...|✅|2|50%|75%
-3️⃣|mon code est commenté||1|50%|75%
+3️⃣|mon code est commenté|🟡|1|50%|75%
 
 Enjoy the game (well, the grid at least).
