@@ -10,7 +10,7 @@ import Foundation
 public struct Cell : CustomStringConvertible {
     public let cellType: CellType
     public let initialOwner : Owner
-    public let piece : Piece?
+    public var piece : Piece? // Need to change let into var here
     
     public var description : String {
         "\(self.piece?.description ?? "ø") on \(self.cellType), \(self.initialOwner)"

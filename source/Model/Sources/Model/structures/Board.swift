@@ -41,5 +41,27 @@ public struct Board {
         // We call the previous method for both players and return it in a tuple
         return (player1: countPieces(of: .player1), player2: countPieces(of: .player2))
     }
+    
+    public mutating func insert(piece:Piece, atRow row:Int, andColumn column: Int) -> BoardResult {
+        guard row+1 <= nbRows || column+1 <= nbColumns else {
+            return .failed(reason: .outOfBounds)
+        }
+        guard self.grid[row][column].piece == nil else {
+            return .failed(reason: .cellNotEmpty)
+        }
+        self.grid[row][column].piece = piece
+        return .ok
+    }
+    
+    public mutating func removePiece(atRow row: Int,andColumn column: Int) -> BoardResult {
+        guard row+1 <= nbRows || column+1 <= nbColumns else {
+            return .failed(reason: .outOfBounds)
+        }
+        guard self.grid[row][column].piece == nil else {
+            return .failed(reason: .cellEmpty)
+        }
+        self.grid[row][column].piece = nil
+        return .ok
+    }
 }
 
