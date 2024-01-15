@@ -96,3 +96,4 @@ let grid: [[Cell]] = [
 let board = Board(grid: grid)
 
 print(board ?? "error initializing board")
+print ("count piece for player1 (should be 8) : \(board?.countPieces(of: .player1) ?? 0)")
