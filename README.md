@@ -5,6 +5,64 @@ So far, only the board of the game is coded, the rest will follow soon.
 
 To launch the project, open the `xcworkspace` file in XCode and run the project `DouShouQi_CLI`.
 
+Here is my class diagramm:
+
+```mermaid
+classDiagram
+direction LR
+class Board {
+    <<struct>>
+    +nbRows : Int
+    +nbColumns : Int
+    +init?(gid:)
+}
+
+class Cell {
+    <<struct>>
+    +init(cellType:initialOwner:piece:)
+}
+
+class CellType {
+    <<enum>>
+    unknown
+    jungle
+    water
+    trap
+    den
+}
+
+class Owner {
+    noOne
+    player1
+    player2
+}
+
+Cell --> "1" CellType : cellType
+Cell --> "1" Owner : initialOwner
+Board --> "*" Cell : grid
+
+class Animal {
+    <<enum>>
+    rat
+    cat
+    dog
+    wolf
+    leopard
+    tiger
+    lion
+    elephant
+}
+
+class Piece {
+    <<struct>>
+    +init(owner:animal:)
+}
+
+Piece --> "1" Owner : owner
+Piece --> "1" Animal : animal
+Cell --> "?" Piece : piece
+```
+
 Here is Mr Chevaldonné' citerias table with a check of everything i did for this TP
 
  niveau |	description	 | status |	coeff | pénalités TP2 |	pénalités TP3 
