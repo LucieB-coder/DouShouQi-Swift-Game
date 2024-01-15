@@ -1,16 +1,14 @@
 # DouShouQi-SwiftGame
 
-## Description
+## Description of the game
 This project is a DouShouQi command line game coded in swift and usable in your terminal.
 
 Dou Shou Qi, also known as "The Jungle Game" or "The Game of Fighting Animals," is a traditional Chinese strategy board game that dates back over a thousand years. The game is often referred to as the Chinese Animal Chess or Jungle Chess. It is a two-player game that simulates a battle between two armies, each represented by different animal pieces with varying abilities.
 
-## Progress
-So far, only the board of the game is coded, the rest will follow soon.
-
+## About the code ?
 To launch the project, open the `xcworkspace` file in XCode and run the project `DouShouQi_CLI`.
 
-Here is my class diagramm:
+Here is the class diagramm of the `Model` package:
 
 ```mermaid
 classDiagram
@@ -68,7 +66,33 @@ Piece --> "1" Animal : animal
 Cell --> "?" Piece : piece
 ```
 
-Here is Mr Chevaldonné' citerias table with a check of everything i did for this TP
+The output is the DouShouQi board, presented as follow:
+```
+	🌿🦁🟡		🌿  		🪤  		🪹  		🪤  		🌿  		🌿🐯🟡	
+
+	🌿  		🌿🐶🟡		🌿  		🪤  		🌿  		🌿🐱🟡		🌿  	
+
+	🌿🐭🟡		🌿  		🌿🐆🟡		🌿  		🌿🐺🟡		🌿  		🌿🐘🟡	
+
+	🌿  		💧  		💧  		🌿  		💧  		💧  		🌿  	
+
+	🌿  		💧  		💧  		🌿  		💧  		💧  		🌿  	
+
+	🌿  		💧  		💧  		🌿  		💧  		💧  		🌿  	
+
+	🌿  		💧  		💧  		🌿  		💧  		💧  		🌿  	
+
+	🌿🐘🔴		🌿  		🌿🐺🔴		🌿  		🌿🐆🔴		🌿  		🌿🐭🔴	
+
+	🌿  		🌿🐱🔴		🌿  		🪤  		🌿  		🌿🐶🔴		🌿  	
+
+	🌿🐯🔴		🌿  		🪤  		🪹  		🪤  		🌿  		🌿🦁🔴	
+```
+
+## Progress
+So far, only the board of the game is implemented, the rest (rules, players, turn-by-turn game) will follow soon.
+
+Here is Mr Chevaldonné' citerias table with a check of everything I did for this TP, so that you can follow my progress.
 
  niveau |	description	 | status |	coeff | pénalités TP2 |	pénalités TP3 
 ---|---|---|---|---|---
@@ -105,4 +129,4 @@ Here is Mr Chevaldonné' citerias table with a check of everything i did for thi
 3️⃣|mon dépôt possède un readme qui apporte quelque chose...|✅|2|50%|75%
 3️⃣|mon code est commenté|🟡|1|50%|75%
 
-Enjoy the game (well, the grid at least).
+Enjoy the game 🎉 (well, the grid at least).
