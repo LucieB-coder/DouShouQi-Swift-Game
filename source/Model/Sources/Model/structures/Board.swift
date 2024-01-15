@@ -43,7 +43,7 @@ public struct Board {
     }
     
     public mutating func insert(piece:Piece, atRow row:Int, andColumn column: Int) -> BoardResult {
-        guard row+1 <= nbRows || column+1 <= nbColumns else {
+        guard row+1 <= nbRows && column+1 <= nbColumns else {
             return .failed(reason: .outOfBounds)
         }
         guard self.grid[row][column].piece == nil else {
@@ -54,10 +54,10 @@ public struct Board {
     }
     
     public mutating func removePiece(atRow row: Int,andColumn column: Int) -> BoardResult {
-        guard row+1 <= nbRows || column+1 <= nbColumns else {
+        guard row+1 <= nbRows && column+1 <= nbColumns else {
             return .failed(reason: .outOfBounds)
         }
-        guard self.grid[row][column].piece == nil else {
+        guard self.grid[row][column].piece != nil else {
             return .failed(reason: .cellEmpty)
         }
         self.grid[row][column].piece = nil
