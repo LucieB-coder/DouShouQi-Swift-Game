@@ -5,7 +5,7 @@ This project is a DouShouQi command line game coded in swift and usable in your 
 
 Dou Shou Qi, also known as "The Jungle Game" or "The Game of Fighting Animals," is a traditional Chinese strategy board game that dates back over a thousand years. The game is often referred to as the Chinese Animal Chess or Jungle Chess. It is a two-player game that simulates a battle between two armies, each represented by different animal pieces with varying abilities.
 
-## About the code ?
+## About the code
 To launch the project, open the `xcworkspace` file in XCode and run the project `DouShouQi_CLI`.
 
 Here is the class diagramm of the `Model` package:
