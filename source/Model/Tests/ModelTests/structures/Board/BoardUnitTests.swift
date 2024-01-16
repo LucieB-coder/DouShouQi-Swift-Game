@@ -10,8 +10,12 @@ import Model
 import XCTest
 
 class BoardUnitTests: XCTestCase {
-    public var testBoard : Board = Board(
-        grid: [
+    public var grid: [[Cell]] = [[]]
+    
+    override func setUp() {
+        super.setUp()
+        self.grid =
+        [
             [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .lion)),
              Cell(cellType: .jungle),
              Cell(cellType: .trap),
@@ -92,20 +96,23 @@ class BoardUnitTests: XCTestCase {
              Cell(cellType: .jungle),
              Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .lion))],
         ]
-    )!
+    }
     
     func testCountPiecesPlayer1() {
+        let testBoard: Board = Board(grid:self.grid)!
         let countPlayer1 = testBoard.countPieces(of: .player1)
         XCTAssertEqual(8, countPlayer1)
     }
 
     func testCountPieces() {
-        let (player1, player2) = testBoard.countPieces()
-        XCTAssertEqual(8, player1)
-        XCTAssertEqual(8, player2)
+        let testBoard: Board = Board(grid:self.grid)!
+        let countPieces = testBoard.countPieces()
+        XCTAssertEqual(8, countPieces.player1)
+        XCTAssertEqual(8, countPieces.player2)
     }
     
     func testInsertPiece() {
+        var testBoard: Board = Board(grid:self.grid)!
         let piece = Piece(owner: .player1, animal: .cat)
         let result = testBoard.insert(piece: piece, atRow: 0, andColumn: 1)
         
@@ -114,6 +121,7 @@ class BoardUnitTests: XCTestCase {
     }
 
     func testInsertPieceOutOfBounds() {
+        var testBoard: Board = Board(grid:self.grid)!
         let piece = Piece(owner: .player1, animal: .cat)
         let result = testBoard.insert(piece: piece, atRow: 5, andColumn: 10)
         
@@ -121,6 +129,7 @@ class BoardUnitTests: XCTestCase {
     }
 
     func testInsertPieceNotEmptyCell() {
+        var testBoard: Board = Board(grid:self.grid)!
         let piece = Piece(owner: .player1, animal: .cat)
         let result = testBoard.insert(piece: piece, atRow: 1, andColumn: 1)
         
@@ -128,6 +137,7 @@ class BoardUnitTests: XCTestCase {
     }
 
     func testRemovePiece() {
+        var testBoard: Board = Board(grid:self.grid)!
         let result = testBoard.removePiece(atRow: 1, andColumn: 1)
         
         XCTAssertEqual(result, .ok)
@@ -135,12 +145,14 @@ class BoardUnitTests: XCTestCase {
     }
 
     func testRemovePieceOutOfBounds() {
+        var testBoard: Board = Board(grid:self.grid)!
         let result = testBoard.removePiece(atRow: 7, andColumn: 9)
         
         XCTAssertEqual(result, .failed(reason: .outOfBounds))
     }
 
     func testRemovePieceEmptyCell() {
+        var testBoard: Board = Board(grid:self.grid)!
         let result = testBoard.removePiece(atRow: 0, andColumn: 1)
         
         XCTAssertEqual(result, .failed(reason: .cellEmpty))

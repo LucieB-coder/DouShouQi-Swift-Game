@@ -98,7 +98,7 @@ var board = Board(grid: grid)
 // print(board ?? "error initializing board")
 
 // Count pieces of player 1
-// print ("count piece of player1 (should be 8) : \(board?.countPieces(of: .player1) ?? 0)")
+print ("count piece of player1 (should be 8) : \(board?.countPieces(of: .player1) ?? 0)")
 
 // Count pieces for both players
 let allPieceCounts = board?.countPieces()
