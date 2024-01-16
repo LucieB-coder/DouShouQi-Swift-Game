@@ -10,7 +10,6 @@ import Model
 import XCTest
 
 class BoardPerformanceTests: XCTestCase {
-    
     public var grid : [[Cell]] = [[]]
     override func setUp() {
         super.setUp()
@@ -22,6 +21,16 @@ class BoardPerformanceTests: XCTestCase {
             [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player2, animal: .cat)), count: 75)+[Cell] (repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player1, animal: .cat)), count: 25),
 
         ]
+    }
+    
+    func testBoardInitializerPerformance() {
+        measure {
+            let board: Board = Board(grid: self.grid)!
+            XCTAssertNotNil(board)
+            XCTAssertEqual(board.grid, self.grid)
+            XCTAssertEqual(board.nbRows, grid.count)
+            XCTAssertEqual(board.nbColumns, grid.first?.count)
+        }
     }
     
     func testCountPiecesOfPerformance() {

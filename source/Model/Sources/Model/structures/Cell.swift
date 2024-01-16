@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Cell : CustomStringConvertible {
+public struct Cell : CustomStringConvertible, Equatable {
     public let cellType: CellType
     public let initialOwner : Owner
     public var piece : Piece? // Need to change let into var here

@@ -34,6 +34,25 @@ class BoardUnitTests: XCTestCase {
         ]
     }
     
+    func testBoardInitializerReturnsNil() {
+        // New row not containing the same size as the other ones
+        self.grid.append([
+            Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
+            Cell(cellType: .jungle)
+        ])
+        let board = Board(grid: self.grid)
+        XCTAssertNil(board)
+    }
+    
+    func testBoardInitializer() {
+        // Initializing a board
+        let board: Board = Board(grid: self.grid)!
+        XCTAssertNotNil(board)
+        XCTAssertEqual(board.grid, self.grid)
+        XCTAssertEqual(board.nbRows, grid.count)
+        XCTAssertEqual(board.nbColumns, grid.first?.count)
+    }
+    
     func testCountPiecesPlayer1() {
         let testBoard: Board = Board(grid:self.grid)!
         let countPlayer1 = testBoard.countPieces(of: .player1)
