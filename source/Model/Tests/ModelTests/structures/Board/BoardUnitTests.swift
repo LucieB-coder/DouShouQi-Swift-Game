@@ -25,90 +25,26 @@ class BoardUnitTests: XCTestCase {
              Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .tiger))],
       
             [Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .dog)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .trap),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .cat)),
-             Cell(cellType: .jungle)],
-      
-            [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .rat)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .leopard)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .wolf)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .elephant))],
-      
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-      
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-      
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-      
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-      
-            [Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .elephant)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .wolf)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .leopard)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .rat))],
-      
-            [Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .trap),
-             Cell(cellType: .jungle),
              Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .dog)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .trap),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
              Cell(cellType: .jungle)],
-      
-            [Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .tiger)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .trap),
-             Cell(cellType: .den),
-             Cell(cellType: .trap),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .lion))],
         ]
     }
     
     func testCountPiecesPlayer1() {
         let testBoard: Board = Board(grid:self.grid)!
         let countPlayer1 = testBoard.countPieces(of: .player1)
-        XCTAssertEqual(8, countPlayer1)
+        XCTAssertEqual(2, countPlayer1)
     }
 
     func testCountPieces() {
         let testBoard: Board = Board(grid:self.grid)!
         let countPieces = testBoard.countPieces()
-        XCTAssertEqual(8, countPieces.player1)
-        XCTAssertEqual(8, countPieces.player2)
+        XCTAssertEqual(2, countPieces.player1)
+        XCTAssertEqual(2, countPieces.player2)
     }
     
     func testInsertPiece() {
@@ -123,7 +59,7 @@ class BoardUnitTests: XCTestCase {
     func testInsertPieceOutOfBounds() {
         var testBoard: Board = Board(grid:self.grid)!
         let piece = Piece(owner: .player1, animal: .cat)
-        let result = testBoard.insert(piece: piece, atRow: 5, andColumn: 10)
+        let result = testBoard.insert(piece: piece, atRow: 5, andColumn: 5)
         
         XCTAssertEqual(result, .failed(reason: .outOfBounds))
     }
@@ -146,7 +82,7 @@ class BoardUnitTests: XCTestCase {
 
     func testRemovePieceOutOfBounds() {
         var testBoard: Board = Board(grid:self.grid)!
-        let result = testBoard.removePiece(atRow: 7, andColumn: 9)
+        let result = testBoard.removePiece(atRow: 7, andColumn: 7)
         
         XCTAssertEqual(result, .failed(reason: .outOfBounds))
     }

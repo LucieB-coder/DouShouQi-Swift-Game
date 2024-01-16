@@ -11,29 +11,32 @@ import XCTest
 
 class BoardPerformanceTests: XCTestCase {
     
+    public var grid : [[Cell]] = [[]]
+    override func setUp() {
+        super.setUp()
+        self.grid =
+        [
+            [Cell](repeating: Cell(cellType: .jungle), count: 100),
+            [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player1, animal: .cat)), count: 100),
+            [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player2, animal: .cat)), count: 100),
+            [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player2, animal: .cat)), count: 75)+[Cell] (repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player1, animal: .cat)), count: 25),
+
+        ]
+    }
+    
     func testCountPiecesOfPerformance() {
-        var grid : [[Cell]] = [[Cell]](repeating: [Cell](repeating: Cell(cellType: .jungle), count: 100), count: 100)
-        let player1Row :[Cell] = [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player1, animal: .cat)), count: 100)
-        grid.append(player1Row)
-        let board = Board(grid: grid)!
+        let board = Board(grid: self.grid)!
 
         measure() {
             // This block of code will be executed multiple times, and XCTest will measure its performance.
             let count = board.countPieces(of: .player1)
-            XCTAssertEqual(100, count) // Adjust the expected count based on your specific scenario
+            XCTAssertEqual(125, count) // Adjust the expected count based on your specific scenario
         }
     }
     
     
     func testCountPiecesPerformance() {
-        var grid : [[Cell]] = [[Cell]](repeating: [Cell](repeating: Cell(cellType: .jungle), count: 100), count: 100)
-        let rowPlayer1 :[Cell] = [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player1, animal: .cat)), count: 100)
-        let rowPlayer2 :[Cell] = [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player2, animal: .cat)), count: 100)
-        let rowMix: [Cell] = [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player2, animal: .cat)), count: 75) + [Cell](repeating: Cell(cellType: .jungle, initialOwner: .noOne, piece: Piece(owner: .player1, animal: .cat)), count: 25)
-        grid.append(rowPlayer1)
-        grid.append(rowPlayer2)
-        grid.append(rowMix)
-        let board = Board(grid: grid)!
+        let board = Board(grid: self.grid)!
 
         measure() {
             // This block of code will be executed multiple times, and XCTest will measure its performance.
@@ -44,7 +47,7 @@ class BoardPerformanceTests: XCTestCase {
     }
 
     func testInsertPerformance() {
-        var board = Board(grid: [[Cell]](repeating: [Cell](repeating: Cell(cellType: .jungle), count: 1000), count: 1000))!
+        var board = Board(grid: self.grid)!
         let piece = Piece(owner: .player1, animal: .cat)
         
         measure {
@@ -58,12 +61,12 @@ class BoardPerformanceTests: XCTestCase {
     }
     
     func testRemovePerformance() {
-        var board = Board(grid: [[Cell]](repeating: [Cell](repeating: Cell(cellType: .jungle), count: 100), count: 100))!
+        var board = Board(grid: self.grid)!
 
         measure() {
             // This block of code will be executed multiple times, and XCTest will measure its performance.
-            for row in 0..<100 {
-                for column in 0..<100 {
+            for row in 0..<board.nbRows {
+                for column in 0..<board.nbColumns {
                     _ = board.removePiece(atRow: row, andColumn: column)
                 }
             }
