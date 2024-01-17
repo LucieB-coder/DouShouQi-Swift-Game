@@ -29,7 +29,7 @@ To be able to launch the project, you have to clone this repo and open it in XCo
 If you want to **launch the project and see the command line tests results**, you have to select `DouShouQi_CLI` and build the project.
 
 The output is the DouShouQi board, presented as follow:
-	```
+```
 		🌿🦁🟡		🌿  		🪤  		🪹  		🪤  		🌿  		🌿🐯🟡	
 	
 		🌿  		🌿🐶🟡		🌿  		🪤  		🌿  		🌿🐱🟡		🌿  	
@@ -49,7 +49,7 @@ The output is the DouShouQi board, presented as follow:
 		🌿  		🌿🐱🔴		🌿  		🪤  		🌿  		🌿🐶🔴		🌿  	
 	
 		🌿🐯🔴		🌿  		🪤  		🪹  		🪤  		🌿  		🌿🦁🔴	
-	```
+```
 
 You can also see under the results of the command line tests on the new `countPieces` of a player `countPieces` of both the players, `insert` and `remove`methods.
 
