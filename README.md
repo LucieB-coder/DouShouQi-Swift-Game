@@ -15,7 +15,7 @@ Commit hash : `06c5a8ed3117e008588de69fe6eb42bfe8660531`
 
 ## Project and Packages
 
-Project `DouShouQi_CL` : The command line interface of the game
+Project `DouShouQi_CLI` : The command line interface of the game
 
 Package `Model`: Model of the application, containing structures, enumerations and tests
 
