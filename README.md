@@ -60,6 +60,50 @@ Is you want to **launch the unit and performance tests**, select the package `Mo
 ```mermaid
 	classDiagram
 	direction LR
+	class Cell {
+	    <<struct>>
+	    +init(cellType:initialOwner:piece:)
+	}
+	
+	class CellType {
+	    <<enum>>
+	    unknown
+	    jungle
+	    water
+	    trap
+	    den
+	}
+	
+	class Owner {
+	    noOne
+	    player1
+	    player2
+	}
+	
+	Cell --> "1" CellType : cellType
+	Cell --> "1" Owner : initialOwner
+	Board --> "*" Cell : grid
+	
+	class Animal {
+	    <<enum>>
+	    rat
+	    cat
+	    dog
+	    wolf
+	    leopard
+	    tiger
+	    lion
+	    elephant
+	}
+	
+	class Piece {
+	    <<struct>>
+	    +init(owner:animal:)
+	}
+	
+	Piece --> "1" Owner : owner
+	Piece --> "1" Animal : animal
+	Cell --> "?" Piece : piece
 	class Board {
 	    <<struct>>
 	    +nbRows : Int
