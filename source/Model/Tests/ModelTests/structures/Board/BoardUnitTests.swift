@@ -13,7 +13,6 @@ class BoardUnitTests: XCTestCase {
     public var grid: [[Cell]] = [[]]
     
     override func setUp() {
-        super.setUp()
         self.grid =
         [
             [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .lion)),
@@ -27,7 +26,7 @@ class BoardUnitTests: XCTestCase {
             [Cell(cellType: .jungle),
              Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .dog)),
              Cell(cellType: .jungle),
-             Cell(cellType: .trap),
+             Cell(cellType: .trap, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
              Cell(cellType: .jungle),
              Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
              Cell(cellType: .jungle)],
@@ -44,6 +43,12 @@ class BoardUnitTests: XCTestCase {
         XCTAssertNil(board)
     }
     
+    func testBoardInitializerOnEmptyGrid(){
+        let board = Board(grid: [])!
+        XCTAssertEqual(0, board.nbRows)
+        XCTAssertEqual(0, board.nbColumns)
+    }
+    
     func testBoardInitializer() {
         // Initializing a board
         let board: Board = Board(grid: self.grid)!
@@ -58,12 +63,18 @@ class BoardUnitTests: XCTestCase {
         let countPlayer1 = testBoard.countPieces(of: .player1)
         XCTAssertEqual(2, countPlayer1)
     }
+    
+    func testCountPiecesPlayer2() {
+        let testBoard: Board = Board(grid:self.grid)!
+        let countPlayer2 = testBoard.countPieces(of: .player2)
+        XCTAssertEqual(3, countPlayer2)
+    }
 
     func testCountPieces() {
         let testBoard: Board = Board(grid:self.grid)!
         let countPieces = testBoard.countPieces()
         XCTAssertEqual(2, countPieces.player1)
-        XCTAssertEqual(2, countPieces.player2)
+        XCTAssertEqual(3, countPieces.player2)
     }
     
     func testInsertPiece() {

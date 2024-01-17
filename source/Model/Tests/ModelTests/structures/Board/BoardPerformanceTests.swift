@@ -11,8 +11,8 @@ import XCTest
 
 class BoardPerformanceTests: XCTestCase {
     public var grid : [[Cell]] = [[]]
+    
     override func setUp() {
-        super.setUp()
         self.grid =
         [
             [Cell](repeating: Cell(cellType: .jungle), count: 100),
@@ -39,7 +39,7 @@ class BoardPerformanceTests: XCTestCase {
         measure() {
             // This block of code will be executed multiple times, and XCTest will measure its performance.
             let count = board.countPieces(of: .player1)
-            XCTAssertEqual(125, count) // Adjust the expected count based on your specific scenario
+            XCTAssertEqual(125, count)
         }
     }
     

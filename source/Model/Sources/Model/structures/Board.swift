@@ -7,6 +7,17 @@
 
 import Foundation
 
+public extension Array where Element : Collection {
+    // This function is mapping on all the elements in the array of arrays and apply the given function to it
+    func map(andApplyFunction function: (Element.Element)->Void){
+        for row in self {
+            for column in row {
+                function(column)
+            }
+        }
+    }
+}
+
 public struct Board {
     public let nbRows : Int
     public let nbColumns : Int
@@ -30,11 +41,14 @@ public struct Board {
     }
     
     public func countPieces(of owner: Owner) -> Int {
-        // At the origin, the value is zero
-        // For each row of the board, we add the number of pieces belonging to the owner who we want to count his pieces
-        // $0 is the previous value
-        // $1 is the current row, which we filter to find the pieces of the owner and on which we execute a count action
-        return grid.reduce(0) { $0 + $1.filter { $0.piece?.owner == owner }.count }
+        // We apply the new map function from ou extension on the drig of the board
+        var count: Int = 0
+        self.grid.map(andApplyFunction: {Cell in
+            if(Cell.piece?.owner == owner){
+                count+=1
+            }
+        })
+        return count
     }
     
     public func countPieces() -> (player1: Int, player2: Int) {
@@ -43,23 +57,29 @@ public struct Board {
     }
     
     public mutating func insert(piece:Piece, atRow row:Int, andColumn column: Int) -> BoardResult {
+        // Guarding that we are inserting the piece on an existing cell (and check that it is not out of bounds)
         guard row+1 <= nbRows && column+1 <= nbColumns else {
             return .failed(reason: .outOfBounds)
         }
+        // Guarding that there is not already a piece on the cell we want to insert the piece in
         guard self.grid[row][column].piece == nil else {
             return .failed(reason: .cellNotEmpty)
         }
+        // Inserting the piece in the cell
         self.grid[row][column].piece = piece
         return .ok
     }
     
     public mutating func removePiece(atRow row: Int,andColumn column: Int) -> BoardResult {
+        // Guarding that we are removing the piece from an existing cell (and check that it is not out of bounds)
         guard row+1 <= nbRows && column+1 <= nbColumns else {
             return .failed(reason: .outOfBounds)
         }
+        // Guarding that there is already a piece on the cell we want to remove the piece from
         guard self.grid[row][column].piece != nil else {
             return .failed(reason: .cellEmpty)
         }
+        // Removing the piece from the cell
         self.grid[row][column].piece = nil
         return .ok
     }

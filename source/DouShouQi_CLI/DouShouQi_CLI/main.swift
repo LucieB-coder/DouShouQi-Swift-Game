@@ -93,14 +93,14 @@ let grid: [[Cell]] = [
     
 ]
 
-// Test board display
+// Test board display -------------
 var board = Board(grid: grid)
 // print(board ?? "error initializing board")
 
-// Count pieces of player 1
+// Count pieces of player 1 -------------
 print ("count piece of player1 (should be 8) : \(board?.countPieces(of: .player1) ?? 0)")
 
-// Count pieces for both players
+// Count pieces for both players -------------
 let allPieceCounts = board?.countPieces()
 print("count piece of player1 (should be 8) : \(allPieceCounts?.player1 ?? 0)")
 print("count piece of player2 (should be 8) : \(allPieceCounts?.player2 ?? 0)")
