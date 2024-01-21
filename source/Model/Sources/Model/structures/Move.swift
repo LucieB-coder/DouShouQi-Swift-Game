@@ -8,11 +8,16 @@
 import Foundation
 
 public struct Move {
-    public let fromCell: Cell
-    public let toCell: Cell
     
-    init(fromCell: Cell, toCell: Cell) {
-        self.fromCell = fromCell
-        self.toCell = toCell
+    public let fromRow: Int
+    public let fromColumn: Int
+    public let toRow: Int
+    public let toColumn: Int
+    
+    init(fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) {
+        self.fromRow = fromRow
+        self.fromColumn = fromColumn
+        self.toRow = toRow
+        self.toColumn = toColumn
     }
 }
