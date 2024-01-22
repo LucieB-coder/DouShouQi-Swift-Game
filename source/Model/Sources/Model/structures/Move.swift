@@ -8,16 +8,21 @@
 import Foundation
 
 public struct Move {
+    let owner : Owner
+    let fromRow: Int
+    let fromColumn: Int
+    let toRow: Int
+    let toColumn: Int
     
-    public let fromRow: Int
-    public let fromColumn: Int
-    public let toRow: Int
-    public let toColumn: Int
-    
-    init(fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) {
+    init(owner: Owner, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) {
+        self.owner = owner
         self.fromRow = fromRow
         self.fromColumn = fromColumn
         self.toRow = toRow
         self.toColumn = toColumn
+    }
+    
+    public var description : String {
+        "\(self.owner): [\(self.fromRow), \(self.fromColumn)] -> [\(self.toRow), \(self.toColumn)]"
     }
 }

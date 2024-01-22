@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ClassicRules : Rules {
+public class ClassicRules /* : Rules */ {
     
     // There are two players, player1 and player2
     // Replace Owner by player next TP
@@ -106,6 +106,7 @@ class ClassicRules : Rules {
         return currentPlayer
     }
     
+    // Incomplete rules
     func isMoveValid(board: Board, move: Move) -> Bool {
         
         // Check if the move is doesn't make a piece stay where it is
