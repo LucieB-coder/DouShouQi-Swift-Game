@@ -135,7 +135,6 @@ public struct VerySimpleRules : Rules {
         return validMoves
     }
     
-    // Need to check if the move is valid
     public func getMoves(board: Board, owner: Owner, fromRow: Int, fromColumn: Int) -> [Move] {
         var validMoves: [Move] = []
 
@@ -349,8 +348,6 @@ public struct VerySimpleRules : Rules {
         
         // The game is not over
         return (false,.notFinished)
-        
-            
     }
     
     public mutating func playedMove(move: Move, boardBeforeMove: Board, boardAfterMove: Board) {
