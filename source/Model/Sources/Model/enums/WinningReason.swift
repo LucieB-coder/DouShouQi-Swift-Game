@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum WinningReason {
+public enum WinningReason : Equatable{
     case denReached
     case noMorePieces
     case noMovesLeft

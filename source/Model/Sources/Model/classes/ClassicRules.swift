@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ClassicRules /* : Rules */ {
+  /*public class ClassicRules /* : Rules */ {
     
     // There are two players, player1 and player2
     // Replace Owner by player next TP
@@ -227,4 +227,4 @@ public class ClassicRules /* : Rules */ {
         return selfDen.piece != nil
     }
     
-}
+}*/

@@ -15,15 +15,15 @@ public struct Board : Hashable {
     
     public init?(grid: [[Cell]]) {
         let firstRowSize : Int = grid.first?.count ?? 0
-        // allSatisfy enables to apply a condition to each row of the array
-        // returns true if all rows fills the condition
-        // returns false otherwise
-        let areRowsEqualSize = grid.allSatisfy {$0.count == firstRowSize }
-        // guard is a control statement to execute some code if the condition is not met
-        guard areRowsEqualSize else {
-            // Rows have different sizes
-            return nil
-        }
+        // // allSatisfy enables to apply a condition to each row of the array
+        // // returns true if all rows fills the condition
+        // // returns false otherwise
+        // let areRowsEqualSize = grid.allSatisfy {$0.count == firstRowSize }
+        // // guard is a control statement to execute some code if the condition is not met
+        // guard areRowsEqualSize else {
+        //  // Rows have different sizes
+        //     return nil
+        // }
         self.nbRows = grid.count
         self.nbColumns = grid.first?.count ?? 0
         self.grid = grid

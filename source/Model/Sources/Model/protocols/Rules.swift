@@ -19,5 +19,5 @@ public protocol Rules {
     func getMoves(board: Board, owner:Owner, fromRow: Int, fromColumn: Int) -> [Move]
     func getMoves(board: Board, owner:Owner) -> [Move]
     func isGameOver(board: Board, row: Int, column: Int) -> (Bool, Result)
-    func playedMove(move: Move, boardBeforeMove: Board, boardAfterMove: Board)
+    mutating func playedMove(move: Move, boardBeforeMove: Board, boardAfterMove: Board)
 }

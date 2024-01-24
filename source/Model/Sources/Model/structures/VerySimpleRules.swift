@@ -8,6 +8,7 @@
 import Foundation
 
 public struct VerySimpleRules : Rules {
+    
     public var occurences: [Board : Int]
     public var historic: [Move]
     
@@ -17,7 +18,7 @@ public struct VerySimpleRules : Rules {
         [
             [Cell(cellType: .jungle),
              Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .lion)),
-             Cell(cellType: .den),
+             Cell(cellType: .den, initialOwner: .player1),
              Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .tiger)),
              Cell(cellType: .jungle)],
 
@@ -41,7 +42,7 @@ public struct VerySimpleRules : Rules {
             
             [Cell(cellType: .jungle),
              Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .tiger)),
-             Cell(cellType: .den),
+             Cell(cellType: .den, initialOwner: .player2),
              Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .lion)),
              Cell(cellType: .jungle)],
              
@@ -52,7 +53,7 @@ public struct VerySimpleRules : Rules {
     
     public static func checkBoard(b: Board) throws {
         // Check that the grid is not empty
-        guard b.grid != [] else {
+        guard b.grid != [[]] else {
             throw InvalidBoardError.badDimensions(nbRows: 0, nbColumns: 0)
         }
         
@@ -92,9 +93,9 @@ public struct VerySimpleRules : Rules {
                 guard piece != nil else {
                     continue // Skip empty cells
                 }
-                guard piece!.owner != nil else{
+                /*guard piece!.owner != nil else{
                     throw InvalidBoardError.pieceWithNoOwner(piece: piece!)
-                }
+                }*/
 
                 if !encounteredPieces.insert(piece!).inserted {
                     throw InvalidBoardError.multipleOccurencesOfSamePiece(piece: piece!)
@@ -112,6 +113,7 @@ public struct VerySimpleRules : Rules {
     }
     
     public func getMoves(board: Board, owner: Owner) -> [Move] {
+        print(board,owner)
         var validMoves : [Move] = []
         for (rowIndex, row) in board.grid.enumerated() {
             for (cellIndex,cell) in row.enumerated() {
@@ -120,11 +122,14 @@ public struct VerySimpleRules : Rules {
                 guard piece != nil else {
                     continue // Skip empty cells
                 }
+                print("i found the \(piece!.animal) of \(piece!.owner)")
                 guard piece!.owner == owner else{
                     continue // Skip pieces of the oponent
                 }
-
-                validMoves.append(contentsOf: getMoves(board: board, owner: owner, fromRow: rowIndex, fromColumn : cellIndex))
+                print("Hey this is my piece !")
+                let moves : [Move] = getMoves(board: board, owner: owner, fromRow: rowIndex, fromColumn : cellIndex)
+                print(moves)
+                validMoves.append(contentsOf: moves)
             }
         }
         return validMoves
@@ -140,7 +145,7 @@ public struct VerySimpleRules : Rules {
             let toRow = fromRow + rowOffset
             let toColumn = fromColumn + colOffset
 
-            let newMove = Move(owner: owner, fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn)
+            let newMove = Move(owner: owner, fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn)!
 
             if isMoveValid(board: board, move: newMove) {
                 validMoves.append(newMove)
@@ -159,7 +164,7 @@ public struct VerySimpleRules : Rules {
         }
         
         // Check if the moove is in the board boundaries
-        guard toRow <= 4 && toColumn <= 4 else {
+        guard (toRow <= 4 && toRow >= 0) && (toColumn <= 4 && toColumn >= 0) else {
             return false
         }
         
@@ -168,9 +173,9 @@ public struct VerySimpleRules : Rules {
             return false
         }
         
-        // Check if the piece at the starting position belongs to the current player
+        // Check if the piece at the starting position belongs to the player who makes the move
         let fromCell = board.grid[fromRow][fromColumn]
-        guard fromCell.piece?.owner == currentPlayer else {
+        guard fromCell.piece?.owner == getNextPlayer() else {
             return false
         }
         
@@ -178,7 +183,7 @@ public struct VerySimpleRules : Rules {
         let toCell = board.grid[toRow][toColumn]
         let toPieceOwner = toCell.piece?.owner
         
-        if toPieceOwner == nil || toPieceOwner != currentPlayer {
+        if toPieceOwner != nil || toPieceOwner != currentPlayer {
             
             // Get the animals involved in the move
             let movingAnimal: Animal = fromCell.piece!.animal
@@ -188,13 +193,14 @@ public struct VerySimpleRules : Rules {
             switch movingAnimal {
             case .rat:
                 if(targetAnimal != nil){
+                    print(targetAnimal!)
                     // Rat cannot eat another animal than the elephant
                     guard targetAnimal == .elephant else {
                         return false
                     }
                 }
                 // Rat can move one square other than its den
-                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board)
+                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: board.grid[fromRow][fromColumn].initialOwner)
                 
             case .elephant:
                 if(targetAnimal != nil){
@@ -204,7 +210,7 @@ public struct VerySimpleRules : Rules {
                     }
                 }
                 // Elephant can move one square other than its den
-                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board)
+                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: board.grid[fromRow][fromColumn].initialOwner)
                               
             default:
                 // Handle attack between animals (check if the moving Animal is not on a trap
@@ -214,7 +220,7 @@ public struct VerySimpleRules : Rules {
                     }
                 }
                 // Animals can move one square other than their den
-                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board)
+                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: board.grid[fromRow][fromColumn].initialOwner)
             }
             
         }
@@ -240,7 +246,7 @@ public struct VerySimpleRules : Rules {
         }
         
         // Check if the moove is in the board boundaries
-        guard move.toRow <= board.nbRows && move.toColumn <= board.nbColumns else {
+        guard (move.toRow <= board.nbRows-1 && move.toRow >= 0) && (move.toColumn <= board.nbColumns-1 && move.toColumn >= 0) else {
             return false
         }
         
@@ -249,9 +255,9 @@ public struct VerySimpleRules : Rules {
             return false
         }
         
-        // Check if the piece at the starting position belongs to the current player
+        // Check if the piece at the starting position belongs to the player who makes the move
         let fromCell = board.grid[move.fromRow][move.fromColumn]
-        guard fromCell.piece?.owner == currentPlayer else {
+        guard fromCell.piece?.owner == move.owner else {
             return false
         }
         
@@ -277,7 +283,7 @@ public struct VerySimpleRules : Rules {
                     }
                 }
                 // Rat can move one square other than its den
-                return isMoveOneSquare(move) && isTargetNotSelfDen(targetCell: toCell, board: board)
+                return isMoveOneSquare(move) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: move.owner)
                 
             case .elephant:
                 if(targetAnimal != nil){
@@ -287,7 +293,7 @@ public struct VerySimpleRules : Rules {
                     }
                 }
                 // Elephant can move one square other than its den
-                return isMoveOneSquare(move) && isTargetNotSelfDen(targetCell: toCell, board: board)
+                return isMoveOneSquare(move) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: move.owner)
                 
             default:
                 // Handle attack between animals (check if the moving Animal is not on a trap
@@ -297,7 +303,7 @@ public struct VerySimpleRules : Rules {
                     }
                 }
                 // Animals can move one square other than their den
-                return isMoveOneSquare(move) && isTargetNotSelfDen(targetCell: toCell, board: board)
+                return isMoveOneSquare(move) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: move.owner)
             }
             
         }
@@ -312,10 +318,8 @@ public struct VerySimpleRules : Rules {
     }
     
     // Helper method to check if the target cell of a move is its den
-    private func isTargetNotSelfDen(targetCell: Cell, board : Board ) -> Bool {
-        let currentPlayer: Owner = getNextPlayer() == .player1 ? .player2 : .player1
-        
-        return !(targetCell.cellType == .den && targetCell.initialOwner == currentPlayer)
+    private func isTargetNotSelfDen(targetCell: Cell, board : Board, owner: Owner ) -> Bool {
+        return !(targetCell.cellType == .den && targetCell.initialOwner == owner)
     }
     
     // Helper method to check if an animal can attack another
@@ -327,7 +331,7 @@ public struct VerySimpleRules : Rules {
         // no even case with those rules
         
         // Case of win if the den is reached
-        if row == 3 && (column == 0 || column == 4) {
+        if column == 3 && (row == 0 || row == 4) {
             return (true, .winner(owner: historic.last?.owner ?? .noOne , reason: .denReached))
         }
         
@@ -349,8 +353,9 @@ public struct VerySimpleRules : Rules {
             
     }
     
-    public func playedMove(move: Move, boardBeforeMove: Board, boardAfterMove: Board) {
-        // Don't need to do anything with those rules
+    public mutating func playedMove(move: Move, boardBeforeMove: Board, boardAfterMove: Board) {
+        self.occurences.updateValue((self.occurences[boardAfterMove] ?? 0 )+1, forKey: boardAfterMove)
+        self.historic.append(move)
         return
     }
     
