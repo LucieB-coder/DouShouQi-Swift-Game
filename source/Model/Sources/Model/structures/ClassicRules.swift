@@ -21,12 +21,12 @@ public struct ClassicRules : Rules {
         let numRows = b.grid.count
         let numCols = b.grid[0].count
         
-        // Check that the number of rows is always the same as it was in the creation
+        // Check that the number of rows is always 7
         guard numRows == 7 else {
             throw InvalidBoardError.badDimensions(nbRows: numRows, nbColumns: numCols)
         }
 
-        // Check that the number of columns is always the same as it was in the creation
+        // Check that the number of columns is always 10
         guard numCols == 10 else {
             throw InvalidBoardError.badDimensions(nbRows: numRows, nbColumns: numCols)
         }
@@ -36,10 +36,10 @@ public struct ClassicRules : Rules {
             throw InvalidBoardError.badDimensions(nbRows: numRows, nbColumns: numCols)
         }
         
-        // Check that the all the cells are of type .jungle or .den
+        // Check that the all the cells are not of type .unknown
         for (rowIndex, row) in b.grid.enumerated() {
             for (colIndex, cell) in row.enumerated() {
-                guard cell.cellType == .den || cell.cellType == .jungle else {
+                guard cell.cellType != .unknown else {
                     throw InvalidBoardError.badCellType(cellType: cell.cellType, row: rowIndex, column: colIndex)
                 }
             }
@@ -57,15 +57,26 @@ public struct ClassicRules : Rules {
                 /*guard piece!.owner != nil else{
                     throw InvalidBoardError.pieceWithNoOwner(piece: piece!)
                 }*/
+                
+                // Check that the dens are not occupied by their initial owner
+                if(cell.cellType == .den && cell.piece != nil){
+                    guard cell.initialOwner != cell.piece!.owner else{
+                        throw InvalidBoardError.pieceNotAllowedOnThisCell(piece: cell.piece!, cell: cell)
+                    }
+                }
+                
+                // Check that water cells do not have animals other than rat
+                if (cell.cellType == .water && cell.piece != nil){
+                    guard cell.piece!.animal != .rat else {
+                        throw InvalidBoardError.pieceNotAllowedOnThisCell(piece: cell.piece!, cell: cell)
+                    }
+                }
 
                 if !encounteredPieces.insert(piece!).inserted {
                     throw InvalidBoardError.multipleOccurencesOfSamePiece(piece: piece!)
                 }
             }
         }
-        
-        // Check that a piece can be where it is
-        // Implement for Classic Rules
     }
     
     public func getNextPlayer() -> Owner {
