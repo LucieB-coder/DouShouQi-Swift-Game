@@ -12,6 +12,11 @@ public struct VerySimpleRules : Rules {
     public var occurences: [Board : Int]
     public var historic: [Move]
     
+    public init(occurences: [Board : Int] = [:], historic: [Move] = []) {
+        self.occurences = occurences
+        self.historic = historic
+    }
+    
     public static func createBoard() -> Board {
         // Grid for board initialization
         let grid: [[Cell]] =
@@ -355,10 +360,4 @@ public struct VerySimpleRules : Rules {
         self.historic.append(move)
         return
     }
-    
-    public init(occurences: [Board : Int] = [:], historic: [Move] = []) {
-        self.occurences = occurences
-        self.historic = historic
-    }
-    
 }

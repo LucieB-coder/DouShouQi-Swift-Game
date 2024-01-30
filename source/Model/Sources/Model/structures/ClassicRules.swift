@@ -8,9 +8,102 @@
 import Foundation
 
 public struct ClassicRules : Rules {
-    public var occurences: [Board : Int]
     
+    public var occurences: [Board : Int]
     public var historic: [Move]
+    
+    public init(occurences: [Board : Int] = [:], historic: [Move] = []) {
+        self.occurences = occurences
+        self.historic = historic
+    }
+    
+    public static func createBoard() -> Board {
+        // Grid for board initialization
+        let grid: [[Cell]] =
+        [
+            [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .lion)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .trap),
+             Cell(cellType: .den),
+             Cell(cellType: .trap),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .tiger))],
+            
+            [Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .dog)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .trap),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .cat)),
+             Cell(cellType: .jungle)],
+            
+            [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .rat)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .leopard)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .wolf)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .elephant))],
+            
+            [Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),],
+            
+            [Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),],
+            
+            [Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),],
+            
+            [Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),
+             Cell(cellType: .water),
+             Cell(cellType: .water),
+             Cell(cellType: .jungle),],
+            
+            [Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .elephant)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .wolf)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .leopard)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .rat))],
+            
+            [Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .trap),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .dog)),
+             Cell(cellType: .jungle)],
+            
+            [Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .tiger)),
+             Cell(cellType: .jungle),
+             Cell(cellType: .trap),
+             Cell(cellType: .den),
+             Cell(cellType: .trap),
+             Cell(cellType: .jungle),
+             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .lion))],
+        ]
+        // Returns the new board
+        return Board(grid: grid)!
+    }
     
     public static func checkBoard(b: Board) throws {
         // Check that the grid is not empty
@@ -239,103 +332,13 @@ public struct ClassicRules : Rules {
     }
     
     
-    // There are two players, player1 and player2
-    // Replace Owner by player next TP
-    private var currentPlayer: Owner = .player1
     
-    public static func createBoard() -> Board {
-        // Grid for board initialization
-        let grid: [[Cell]] =
-        [
-            [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .lion)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .trap),
-             Cell(cellType: .den),
-             Cell(cellType: .trap),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .tiger))],
-            
-            [Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .dog)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .trap),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .cat)),
-             Cell(cellType: .jungle)],
-            
-            [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .rat)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .leopard)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .wolf)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .elephant))],
-            
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-            
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-            
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-            
-            [Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),
-             Cell(cellType: .water),
-             Cell(cellType: .water),
-             Cell(cellType: .jungle),],
-            
-            [Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .elephant)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .wolf)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .leopard)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .rat))],
-            
-            [Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .trap),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .dog)),
-             Cell(cellType: .jungle)],
-            
-            [Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .tiger)),
-             Cell(cellType: .jungle),
-             Cell(cellType: .trap),
-             Cell(cellType: .den),
-             Cell(cellType: .trap),
-             Cell(cellType: .jungle),
-             Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .lion))],
-        ]
-        // Returns the new board
-        return Board(grid: grid)!
-    }
     
     // 🚨 Need to complete classicRules here
     public func isMoveValid(board: Board, move: Move) -> Bool {
         
         // Check if the move is doesn't make a piece stay where it is
-        /*guard move.fromRow != move.toRow || move.fromColumn != move.toColumn else {
+        guard move.fromRow != move.toRow || move.fromColumn != move.toColumn else {
             return false
         }
         
@@ -351,14 +354,14 @@ public struct ClassicRules : Rules {
         
         // Check if the piece at the starting position belongs to the current player
         let fromCell = board.grid[move.fromRow][move.fromColumn]
-        guard fromCell.piece?.owner == currentPlayer else {
+        guard fromCell.piece?.owner == getNextPlayer() else {
             return false
         }
         
         // Check if the destination cell is empty or occupied by an opponent's piece
         let toCell = board.grid[move.toRow][move.toColumn]
         let toPieceOwner = toCell.piece?.owner
-        if toPieceOwner == nil || toPieceOwner != currentPlayer {
+        if toPieceOwner == nil || toPieceOwner != getNextPlayer() {
             
             // Get the animals involved in the move
             let movingAnimal: Animal = fromCell.piece!.animal
@@ -414,9 +417,7 @@ public struct ClassicRules : Rules {
                 // Animals can move one square other than their den
                 return isMoveOneSquare(move) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: move.owner)
             }
-            
         }
-        */
         return false
     }
     
@@ -451,10 +452,7 @@ public struct ClassicRules : Rules {
         return !(targetCell.cellType == .den && targetCell.initialOwner == owner)
     }
     
-    public init(occurences: [Board : Int] = [:], historic: [Move] = []) {
-        self.occurences = occurences
-        self.historic = historic
-    }
+    
     
     
 }
