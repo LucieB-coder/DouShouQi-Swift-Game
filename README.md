@@ -11,7 +11,6 @@ Here is Mr Chevaldonné' citerias table with a check of everything i did for thi
 
 To evaluate my work, you can base yourself on the last commit of the branch `tp3`
 
-Commit hash : `f6725c10c1510c16a2d9dbca921cf46eb82b2d1d`
 
 ## Project and Packages
 
