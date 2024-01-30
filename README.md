@@ -1,4 +1,4 @@
- 	# DouShouQi-SwiftGame
+# DouShouQi-SwiftGame
 	
 	This project is a DouShouQi command line game coded in swift and usable in your terminal.
 	So far, only the board of the game is coded, the rest will follow soon.
