@@ -10,7 +10,7 @@ import Model
 import XCTest
 
 
-class ClassicRulesUnitTets: XCTestCase {
+/*class ClassicRulesUnitTets: XCTestCase {
     public var occurences: [Board : Int] = [:]
     public var historic: [Move] = []
     public var grid : [[Cell]] = [[]]
@@ -702,4 +702,4 @@ class ClassicRulesUnitTets: XCTestCase {
         XCTAssertEqual(self.rules?.historic, [Move(owner: .player1, fromRow: 1, fromColumn: 0, toRow: 1, toColumn: 1)!])
     }
  
-}
+}*/

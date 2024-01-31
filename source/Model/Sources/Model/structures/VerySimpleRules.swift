@@ -118,7 +118,6 @@ public struct VerySimpleRules : Rules {
     }
     
     public func getMoves(board: Board, owner: Owner) -> [Move] {
-        print(board,owner)
         var validMoves : [Move] = []
         for (rowIndex, row) in board.grid.enumerated() {
             for (cellIndex,cell) in row.enumerated() {
@@ -127,13 +126,10 @@ public struct VerySimpleRules : Rules {
                 guard piece != nil else {
                     continue // Skip empty cells
                 }
-                print("i found the \(piece!.animal) of \(piece!.owner)")
                 guard piece!.owner == owner else{
                     continue // Skip pieces of the oponent
                 }
-                print("Hey this is my piece !")
                 let moves : [Move] = getMoves(board: board, owner: owner, fromRow: rowIndex, fromColumn : cellIndex)
-                print(moves)
                 validMoves.append(contentsOf: moves)
             }
         }
@@ -160,89 +156,14 @@ public struct VerySimpleRules : Rules {
     }
     
     public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool {
-        let currentPlayer: Owner = getNextPlayer() == .player1 ? .player2 : .player1
-        
-        // Check if the move is doesn't make a piece stay where it is
-        guard fromRow != toRow || fromColumn != toColumn else {
-            return false
-        }
-        
-        // Check if the moove is in the board boundaries
-        guard (toRow <= 4 && toRow >= 0) && (toColumn <= 4 && toColumn >= 0) else {
-            return false
-        }
-        
-        // Check if the moove is not in diagonal
-        guard fromRow == toRow || fromColumn == toColumn else {
-            return false
-        }
-        
-        // Check if the piece at the starting position belongs to the player who makes the move
-        let fromCell = board.grid[fromRow][fromColumn]
-        guard fromCell.piece?.owner == getNextPlayer() else {
-            return false
-        }
-        
-        // Check if the destination cell is empty or occupied by an opponent's piece
-        let toCell = board.grid[toRow][toColumn]
-        let toPieceOwner = toCell.piece?.owner
-        
-        if toPieceOwner != nil || toPieceOwner != currentPlayer {
-            
-            // Get the animals involved in the move
-            let movingAnimal: Animal = fromCell.piece!.animal
-            let targetAnimal : Animal? = toCell.piece?.animal
-            
-            // Implement additional rules specific to each animal
-            switch movingAnimal {
-            case .rat:
-                if(targetAnimal != nil){
-                    print(targetAnimal!)
-                    // Rat cannot eat another animal than the elephant
-                    guard targetAnimal == .elephant else {
-                        return false
-                    }
-                }
-                // Rat can move one square other than its den
-                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: board.grid[fromRow][fromColumn].initialOwner)
-                
-            case .elephant:
-                if(targetAnimal != nil){
-                    // Elephant can eat every animal except rat
-                    guard targetAnimal != .rat else {
-                        return false
-                    }
-                }
-                // Elephant can move one square other than its den
-                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: board.grid[fromRow][fromColumn].initialOwner)
-                              
-            default:
-                // Handle attack between animals (check if the moving Animal is not on a trap
-                if(targetAnimal != nil){
-                    guard isAnimalAbleToAttack(movingAnimal: movingAnimal, targetAnimal: targetAnimal!) else {
-                        return false
-                    }
-                }
-                // Animals can move one square other than their den
-                return isMoveOneSquare(fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn) && isTargetNotSelfDen(targetCell: toCell, board: board, owner: board.grid[fromRow][fromColumn].initialOwner)
-            }
-            
-        }
-        
-        return false
-        
-        // Helper method to check if the move is one square horizontally or vertically
-        func isMoveOneSquare(fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool {
-            let rowDifference = abs(toRow - fromRow)
-            let columnDifference = abs(toColumn - fromColumn)
-            return (rowDifference == 1 && columnDifference == 0) || (rowDifference == 0 && columnDifference == 1)
-        }
-        
+        let currentPlayer: Owner = getNextPlayer()
+        let move : Move = Move(owner: currentPlayer, fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn)!
+        return isMoveValid(board: board, move: move)
     }
     
     
     public func isMoveValid(board: Board, move: Move) -> Bool {
-        let currentPlayer: Owner = getNextPlayer() == .player1 ? .player2 : .player1
+        let currentPlayer: Owner = move.owner
         
         // Check if the move is doesn't make a piece stay where it is
         guard move.fromRow != move.toRow || move.fromColumn != move.toColumn else {

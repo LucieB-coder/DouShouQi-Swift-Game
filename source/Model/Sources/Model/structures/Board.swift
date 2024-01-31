@@ -14,7 +14,7 @@ public struct Board : Hashable {
     
     
     public init?(grid: [[Cell]]) {
-        let firstRowSize : Int = grid.first?.count ?? 0
+        // let firstRowSize : Int = grid.first?.count ?? 0
         // // allSatisfy enables to apply a condition to each row of the array
         // // returns true if all rows fills the condition
         // // returns false otherwise
@@ -47,7 +47,7 @@ public struct Board : Hashable {
     
     public mutating func insert(piece:Piece, atRow row:Int, andColumn column: Int) -> BoardResult {
         // Guarding that we are inserting the piece on an existing cell (and check that it is not out of bounds)
-        guard row+1 <= nbRows && column+1 <= nbColumns else {
+        guard (row <= nbRows-1 && row >= 0) && (column <= nbColumns-1 && column >= 0) else {
             return .failed(reason: .outOfBounds)
         }
         // Guarding that there is not already a piece on the cell we want to insert the piece in
@@ -61,7 +61,7 @@ public struct Board : Hashable {
     
     public mutating func removePiece(atRow row: Int,andColumn column: Int) -> BoardResult {
         // Guarding that we are removing the piece from an existing cell (and check that it is not out of bounds)
-        guard row+1 <= nbRows && column+1 <= nbColumns else {
+        guard (row <= nbRows-1 && row >= 0) && (column <= nbColumns-1 && column >= 0) else {
             return .failed(reason: .outOfBounds)
         }
         // Guarding that there is already a piece on the cell we want to remove the piece from

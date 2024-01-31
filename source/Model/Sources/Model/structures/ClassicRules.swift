@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ClassicRules : Rules {
+/*public struct ClassicRules : Rules {
     
     public var occurences: [Board : Int]
     public var historic: [Move]
@@ -455,4 +455,4 @@ public struct ClassicRules : Rules {
     
     
     
-}
+}*/
