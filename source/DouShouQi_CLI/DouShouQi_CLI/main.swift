@@ -42,39 +42,93 @@ var grid =
      Cell(cellType: .jungle)],
 ]
 
-let board = Board(grid: grid)!
-let rules = VerySimpleRules()
+var board = Board(grid: grid)!
+var rules = VerySimpleRules()
 
 let inputMethod: () -> Move? = {
+    var move : Move? = nil
+    
     print("Enter the starting row:")
-    guard let fromRowInput = readLine(), let fromRow = Int(fromRowInput) else { return nil }
-    
+    var fromRow : Int? = Int(readLine()!)
     print("Enter the starting column:")
-    guard let fromColumnInput = readLine(), let fromColumn = Int(fromColumnInput) else { return nil }
-    
+    var fromColumn : Int? = Int(readLine()!)
     print("Enter the ending row:")
-    guard let toRowInput = readLine(), let toRow = Int(toRowInput) else { return nil }
-    
+    var toRow : Int? = Int(readLine()!)
     print("Enter the ending column:")
-    guard let toColumnInput = readLine(), let toColumn = Int(toColumnInput) else { return nil }
-    let move : Move = Move(owner: .player1, fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn)!
-    guard rules.isMoveValid(board: board, move: move) else {
-        return nil
+    var toColumn : Int? = Int(readLine()!)
+    
+    if (fromRow == nil || fromColumn  == nil || toRow  == nil || toColumn == nil){
+        print("Invalid coordinates")
+    } else {
+        move = Move(owner: .player2, fromRow: fromRow!, fromColumn: fromColumn!, toRow: toRow!, toColumn: toColumn!)
+    }
+    
+    if (move != nil){
+        while (!rules.isMoveValid(board: board, move: move!)){
+            print ("Invalid move")
+            print("Enter the starting row:")
+            fromRow = Int(readLine()!)
+            print("Enter the starting column:")
+            fromColumn = Int(readLine()!)
+            print("Enter the ending row:")
+            toRow = Int(readLine()!)
+            print("Enter the ending column:")
+            toColumn = Int(readLine()!)
+            if (fromRow == nil || fromColumn  == nil || toRow  == nil || toColumn == nil){
+                print("Invalid coordinates")
+            } else {
+                move = Move(owner: .player1, fromRow: fromRow!, fromColumn: fromColumn!, toRow: toRow!, toColumn: toColumn!)
+            }
+        }
     }
     return move
 }
-print(board)
-// Test of random player
-let randomPlayer : RandomPlayer = RandomPlayer(withId: .player1, andName: "Lucie")!
-let move : Move = randomPlayer.chooseMove(in: board, with: rules)!
-print("\(randomPlayer.name) a joué le coup \(move)")
 
-// Test of human player
-let humanPlayer : HumanPlayer = HumanPlayer(withName: "Guillaume", andId: .player1, andInputMethod: inputMethod)!
-let res : Move? = humanPlayer.chooseMove(in: board, with: rules)
-if (res != nil){
-    print("\(humanPlayer.name) a joué le coup \(res!)")
+
+// Test game
+
+
+var currentPlayer : Owner = .noOne
+let randomPlayer : RandomPlayer = RandomPlayer(withId: .player1, andName: "Lucie")!
+let humanPlayer : HumanPlayer = HumanPlayer(withName: "Guillaume", andId: .player2, andInputMethod: inputMethod)!
+var result : (Bool,Result) = (false, .notFinished)
+
+while(result.0 == false){
+    let currentPlayer : Owner = rules.getNextPlayer()
+    print(board)
+    if (currentPlayer == .player1){
+        print("\(randomPlayer.name)' turn")
+        if let move : Move = randomPlayer.chooseMove(in: board, with: rules){
+            let beforeBoard = board
+            let resInsert : BoardResult =  board.insert(piece: board.grid[move.fromRow][move.fromColumn].piece!, atRow: move.toRow, andColumn: move.toColumn)
+            let resRemove : BoardResult = board.removePiece(atRow: move.fromRow, andColumn: move.fromColumn)
+            if(resInsert == .ok && resRemove == .ok){
+                rules.playedMove(move: move, boardBeforeMove: beforeBoard, boardAfterMove: board)
+                result = rules.isGameOver(board: board, row: move.toRow, column: move.toColumn)
+                print("\(randomPlayer.name) played \(move)")
+            } else{
+               print("Problem inserting and removing piece")
+            }
+        } else {
+            print("Invalid move !")
+        }
+    }
+    else{
+        print("\(humanPlayer.name)' turn")
+        if let move : Move = humanPlayer.chooseMove(in: board, with: rules){
+            let beforeBoard = board
+            let resInsert : BoardResult =  board.insert(piece: board.grid[move.fromRow][move.fromColumn].piece!, atRow: move.toRow, andColumn: move.toColumn)
+            let resRemove : BoardResult = board.removePiece(atRow: move.fromRow, andColumn: move.fromColumn)
+            if(resInsert == .ok && resRemove == .ok){
+                rules.playedMove(move: move, boardBeforeMove: beforeBoard, boardAfterMove: board)
+                result = rules.isGameOver(board: board, row: move.toRow, column: move.toColumn)
+                print("\(randomPlayer.name) played \(move)")
+            } else{
+               print("Problem inserting and removing piece")
+            }
+        } else {
+            print("Invalid move !")
+        }
+    }
 }
-else {
-    print("Invalid move :(")
-}
+print("Game over")

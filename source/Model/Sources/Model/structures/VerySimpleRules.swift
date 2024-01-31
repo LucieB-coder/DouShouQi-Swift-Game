@@ -262,7 +262,7 @@ public struct VerySimpleRules : Rules {
         // no even case with those rules
         
         // Case of win if the den is reached
-        if column == 3 && (row == 0 || row == 4) {
+        if column == 2 && (row == 0 || row == 4) {
             return (true, .winner(owner: historic.last?.owner ?? .noOne , reason: .denReached))
         }
         
