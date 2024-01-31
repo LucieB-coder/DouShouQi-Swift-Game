@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Move : Equatable{
+public struct Move : Equatable, CustomStringConvertible{
     public let owner : Owner
     public let fromRow: Int
     public let fromColumn: Int
