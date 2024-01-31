@@ -118,6 +118,7 @@ public struct VerySimpleRules : Rules {
     }
     
     public func getMoves(board: Board, owner: Owner) -> [Move] {
+
         var validMoves : [Move] = []
         for (rowIndex, row) in board.grid.enumerated() {
             for (cellIndex,cell) in row.enumerated() {
@@ -156,9 +157,11 @@ public struct VerySimpleRules : Rules {
     }
     
     public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool {
+
         let currentPlayer: Owner = getNextPlayer()
         let move : Move = Move(owner: currentPlayer, fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn)!
         return isMoveValid(board: board, move: move)
+
     }
     
     
@@ -171,6 +174,9 @@ public struct VerySimpleRules : Rules {
         }
         
         // Check if the moove is in the board boundaries
+        guard (move.fromRow <= board.nbRows-1 && move.fromRow >= 0) && (move.fromColumn <= board.nbColumns-1 && move.fromColumn >= 0) else {
+            return false
+        }
         guard (move.toRow <= board.nbRows-1 && move.toRow >= 0) && (move.toColumn <= board.nbColumns-1 && move.toColumn >= 0) else {
             return false
         }
