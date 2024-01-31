@@ -25,24 +25,12 @@ Package `ModelEmojiDisplayer`: Model extensions to improve the display of the bo
 
 To be able to launch the project, you have to clone this repo and open it in XCode.
 
-If you want to **launch the project and see the command line tests results**, you have to select `DouShouQi_CLI` and build the project.
+If you want to **play a game against a randomPlayer**, you have to select `DouShouQi_CLI` and build the project.
 
-The output is the DouShouQi board, presented as follow:
-```
-	🌿  		🌿🦁🟡		🪹  		🌿🐯🟡		🌿  	
+You will be able to play a game against a randomPlayer (bot that is playing a random valid move) on a simplified board (the real board will come soon I hope)
 
-	🌿🐭🟡		🌿  		🌿🐱🟡		🌿  		🌿🐘🟡	
+If you want to **launch the unit and performance tests**, select the package `Model` in the Scheme menu, edit the scheme to `Test` and run them. `Model` is 100% covered by the tests.
 
-	🌿  		🌿  		🌿  		🌿  		🌿  	
-
-	🌿🐘🔴		🌿  		🌿🐱🔴		🌿  		🌿🐭🔴	
-
-	🌿  		🌿🐯🔴		🪹  		🌿🦁🔴		🌿  	
-```
-
-Is you want to **launch the unit and performance tests**, select the package `Model` in the Scheme menu, edit the scheme to `Test` and run them. `Model` is 100% covered by the tests.
-
-The rules of the DoudhouQi have been simpled, so the board is not the official board and rules. You can check the rules in the structure `VerySimpleRules`, but don't worry, the ijmplementation of the `ClassicRules` of the game are in progress 🚧 🚧 🚧
 
 ## Diagramm class
 
@@ -167,8 +155,6 @@ The rules of the DoudhouQi have been simpled, so the board is not the official b
 ```
 
 ## Progress
-
-So far, only the board of the game is implemented, the rest (rules, players, turn-by-turn game) will follow soon.
 	
 Here is Mr Chevaldonné' citerias table filled with my auto evaluation on everything I did for this TP, so that you can follow my progress.
 
@@ -184,12 +170,12 @@ niveau | description | status | coeff | pénalités TP5 | pénalités TP6
 1️⃣ | j'ai ajouté l'injection de dépendance pour la saisie dans ```HumanPlayer``` |✅ | 4 | 50% | 75%
 2️⃣ | j'ai écrit les tests unitaires pour ```RandomPlayer``` |✅ | 2 | 50% | 75%
 2️⃣ | j'ai écrit les tests unitaires pour ```HumanPlayer``` | ✅ |3 | 50% | 75%
-1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```RandomPlayer``` dans une boucle de jeu || 3 | 50% | 75%
-1️⃣ | j'ai testé dans une application en lignes de commande l'injection d'une méthode de saisie pour ```HumanPlayer``` || 2 | 50% | 75%
-1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```HumanPlayer``` dans une boucle de jeu | |2 | 50% | 75%
+1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```RandomPlayer``` dans une boucle de jeu |✅| 3 | 50% | 75%
+1️⃣ | j'ai testé dans une application en lignes de commande l'injection d'une méthode de saisie pour ```HumanPlayer``` |✅| 2 | 50% | 75%
+1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```HumanPlayer``` dans une boucle de jeu | ✅|2 | 50% | 75%
 3️⃣ | ma couverture de tests pour *Model* dépasse les 90% |✅ | 2 | 50% | 75%
 3️⃣ | mon dépôt possède un readme qui apporte quelque chose... | ✅ |1 | 50% | 75%
-3️⃣ | mon code est commenté || 1   | 50% | 75%
+3️⃣ | mon code est commenté |✅| 1   | 50% | 75%
 🎉 | j'ai ajouté une IA || - | 50% | 75%
 
-Enjoy the game 🎉 (well, the grid at least).
+Enjoy the game 🎉.
