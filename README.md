@@ -9,7 +9,7 @@ Here is Mr Chevaldonné' citerias table with a check of everything i did for thi
 
 ## Commit for correction
 
-To evaluate my work, you can base yourself on the last commit of the branch `tp3`
+To evaluate my work, you can base yourself on the last commit of the branch `tp4`
 
 
 ## Project and Packages
@@ -25,24 +25,12 @@ Package `ModelEmojiDisplayer`: Model extensions to improve the display of the bo
 
 To be able to launch the project, you have to clone this repo and open it in XCode.
 
-If you want to **launch the project and see the command line tests results**, you have to select `DouShouQi_CLI` and build the project.
+If you want to **play a game against a randomPlayer**, you have to select `DouShouQi_CLI` and build the project.
 
-The output is the DouShouQi board, presented as follow:
-```
-	🌿  		🌿🦁🟡		🪹  		🌿🐯🟡		🌿  	
+You will be able to play a game against a randomPlayer (bot that is playing a random valid move) on a simplified board (the real board will come soon I hope)
 
-	🌿🐭🟡		🌿  		🌿🐱🟡		🌿  		🌿🐘🟡	
+If you want to **launch the unit and performance tests**, select the package `Model` in the Scheme menu, edit the scheme to `Test` and run them. `Model` is 100% covered by the tests.
 
-	🌿  		🌿  		🌿  		🌿  		🌿  	
-
-	🌿🐘🔴		🌿  		🌿🐱🔴		🌿  		🌿🐭🔴	
-
-	🌿  		🌿🐯🔴		🪹  		🌿🦁🔴		🌿  	
-```
-
-Is you want to **launch the unit and performance tests**, select the package `Model` in the Scheme menu, edit the scheme to `Test` and run them. `Model` is 100% covered by the tests.
-
-The rules of the DoudhouQi have been simpled, so the board is not the official board and rules. You can check the rules in the structure `VerySimpleRules`, but don't worry, the ijmplementation of the `ClassicRules` of the game are in progress 🚧 🚧 🚧
 
 ## Diagramm class
 
@@ -143,45 +131,51 @@ The rules of the DoudhouQi have been simpled, so the board is not the official b
 	ClassicRules ..> GameError
 	VerySimpleRules ..> GameError
 	
+	class Player {
+		+id: Owner
+		+name: String
+		+init?(withName: String, andId: Owner)
+		+chooseMove(in: Board, with: Rules) Move?
+	}
+	
+	class RandomPlayer {
+		+init?(withName: String, andId: Owner)
+		+chooseMove(in: Board, with: Rules) Move?
+	}
+	
+	class HumanPlayer {
+		+init?(withName: String, andId : Owner, andInputMethod: (HumanPlayer) -> Move)
+		+input : (HumanPlayer) -> Move?
+		+chooseMove(in: Board, with: Rules) Move?
+	}
+	
+	RandomPlayer --|> Player
+	HumanPlayer --|> Player
+	
 ```
 
 ## Progress
-
-So far, only the board of the game is implemented, the rest (rules, players, turn-by-turn game) will follow soon.
 	
 Here is Mr Chevaldonné' citerias table filled with my auto evaluation on everything I did for this TP, so that you can follow my progress.
 
-niveau | description | coeff | status | pénalités TP4 | pénalités TP5  
+niveau | description | status | coeff | pénalités TP5 | pénalités TP6  
 --- | --- | --- | --- | --- | ---
-☢️ | Le dépôt doit être accessible par l'enseignant | ☢️ |✅
-☢️ | un .gitignore doit exister au premier push | ☢️ |✅
-🎬 | les *Packages* et le test compilent | 3 |✅| 50% | 75%
-🎬 | le test et les tests unitaires s'exécutent sans bug | 5|✅ | 50% | 75%	
-1️⃣ | j'ai créé l'enum ```WinningReason``` | 1 |✅| 50% | 75%
-1️⃣ | j'ai créé l'enum ```Result``` | 3 |✅| 50% | 75%
-1️⃣ | j'ai créé la structure ```Move``` | 2 |✅| 50% | 75%	
-3️⃣ | j'ai ajouté une description à ```Move``` | 1 |✅| 50% | 75%
-1️⃣ | j'ai créé le protocole ```Rules``` | 1 |✅| 50% | 75%
-3️⃣ | j'ai modifié ```Board``` à cause du protocole ```Rules``` | 2 |✅| 50% | 75%
-3️⃣ | j'ai testé ces modifications | 2 |✅| 50% | 75%
-1️⃣ | j'ai ajouté le type ```VerySimpleRules``` | 1 |✅| 50% | 75%
-1️⃣ | j'ai écrit ```createBoard``` | 1 |✅| 50% | 75%
-1️⃣ | j'ai créé l'enum ```InvalidBoardError``` | 2 |✅| 50% | 75%
-1️⃣ | j'ai créé l'enum ```GameError``` | 2 |✅| 50% | 75%
-1️⃣ | j'ai écrit ```checkBoard``` | 4 |✅| 50% | 75%	
-2️⃣ | j'ai écrit les tests unitaires pour ```checkBoard``` | 3 |✅| 50% | 75
-1️⃣ | j'ai écrit ```getMoves``` (x2) | 3 |✅| 50% | 75%
-2️⃣ | j'ai écrit les tests unitaires pour ```getMoves``` | 2 |✅| 50% | 75%	
-1️⃣ | j'ai écrit ```isValidMove```, ```getNextPlayer``` | 6 |✅| 50% | 75%	
-2️⃣ | j'ai écrit les tests unitaires pour  ```isValidMove```, ```getNextPlayer``` | 3 |✅| 50% | 75%
-1️⃣ | j'ai écrit ```playedMove``` et géré l'historique | 1 |✅| 50% | 75%
-2️⃣ | j'ai écrit les tests unitaires pour  ```playedMove``` | 1 |✅| 50% | 75%	
-1️⃣ | j'ai écrit ```isGameOver``` | 6 |✅| 50% | 75%
-2️⃣ | j'ai écrit les tests unitaires pour  ```isGameOver``` | 3 |✅| 50% | 75%
-3️⃣ | ma couverture de tests pour *Model* dépasse les 70% | 3 |✅| 50% | 75%
-3️⃣ | ma couverture de tests pour *Model* dépasse les 90% | 3 |✅| 50% | 75%	
-3️⃣ | mon dépôt possède un readme qui apporte quelque chose... | 3 |✅| 50% | 75%
-3️⃣ | mon code est commenté | 1  |✅ | 50% | 75%
-🎉 | j'ai ajouté le type ```ClassicRules``` | - |🚧| 50% | 75%
+☢️ | Le dépôt doit être accessible par l'enseignant |✅ | ☢️ 
+☢️ | un .gitignore doit exister au premier push |✅ | ☢️
+🎬 | les *Packages* et le test compilent |✅ | 1 | 50% | 75%
+🎬 | le test et les tests unitaires s'exécutent sans bug || 2 | 50% | 75%
+1️⃣ | j'ai créé la classe ```Player``` |✅ | 1 | 50% | 75%
+1️⃣ | j'ai créé la classe ```RandomPlayer``` |✅ | 1 | 50% | 75%
+1️⃣ | j'ai créé la classe ```HumanPlayer``` |✅ | 2 | 50% | 75%
+1️⃣ | j'ai ajouté l'injection de dépendance pour la saisie dans ```HumanPlayer``` |✅ | 4 | 50% | 75%
+2️⃣ | j'ai écrit les tests unitaires pour ```RandomPlayer``` |✅ | 2 | 50% | 75%
+2️⃣ | j'ai écrit les tests unitaires pour ```HumanPlayer``` | ✅ |3 | 50% | 75%
+1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```RandomPlayer``` dans une boucle de jeu |✅| 3 | 50% | 75%
+1️⃣ | j'ai testé dans une application en lignes de commande l'injection d'une méthode de saisie pour ```HumanPlayer``` |✅| 2 | 50% | 75%
+1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```HumanPlayer``` dans une boucle de jeu | ✅|2 | 50% | 75%
+3️⃣ | ma couverture de tests pour *Model* dépasse les 90% |✅ | 2 | 50% | 75%
+3️⃣ | mon dépôt possède un readme qui apporte quelque chose... | ✅ |1 | 50% | 75%
+3️⃣ | mon code est commenté |✅| 1   | 50% | 75%
+🎉 | j'ai ajouté une IA || - | 50% | 75%
 
-Enjoy the game 🎉 (well, the grid at least).
+Enjoy the game 🎉.
