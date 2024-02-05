@@ -79,7 +79,7 @@ let inputMethod: () -> Move? = {
         if (fromRow == nil || fromColumn  == nil || toRow  == nil || toColumn == nil){
             print("Invalid coordinates")
         } else {
-            move = Move(owner: .player1, fromRow: fromRow!, fromColumn: fromColumn!, toRow: toRow!, toColumn: toColumn!)
+            move = Move(owner: .player2, fromRow: fromRow!, fromColumn: fromColumn!, toRow: toRow!, toColumn: toColumn!)
             isValid = rules.isMoveValid(board: board, move: move!)
         }
     }
