@@ -47,6 +47,8 @@ var rules = VerySimpleRules()
 
 let inputMethod: () -> Move? = {
     var move : Move? = nil
+    var isValid : Bool = false
+
     
     print("Enter the starting row:")
     var fromRow : Int? = Int(readLine()!)
@@ -61,24 +63,24 @@ let inputMethod: () -> Move? = {
         print("Invalid coordinates")
     } else {
         move = Move(owner: .player2, fromRow: fromRow!, fromColumn: fromColumn!, toRow: toRow!, toColumn: toColumn!)
+        isValid = rules.isMoveValid(board: board, move: move!)
     }
     
-    if (move != nil){
-        while (!rules.isMoveValid(board: board, move: move!)){
-            print ("Invalid move")
-            print("Enter the starting row:")
-            fromRow = Int(readLine()!)
-            print("Enter the starting column:")
-            fromColumn = Int(readLine()!)
-            print("Enter the ending row:")
-            toRow = Int(readLine()!)
-            print("Enter the ending column:")
-            toColumn = Int(readLine()!)
-            if (fromRow == nil || fromColumn  == nil || toRow  == nil || toColumn == nil){
-                print("Invalid coordinates")
-            } else {
-                move = Move(owner: .player1, fromRow: fromRow!, fromColumn: fromColumn!, toRow: toRow!, toColumn: toColumn!)
-            }
+    while (move == nil || isValid == false){
+        if (isValid == false) { print ("Invalid move") }
+        print("Enter the starting row:")
+        fromRow = Int(readLine()!)
+        print("Enter the starting column:")
+        fromColumn = Int(readLine()!)
+        print("Enter the ending row:")
+        toRow = Int(readLine()!)
+        print("Enter the ending column:")
+        toColumn = Int(readLine()!)
+        if (fromRow == nil || fromColumn  == nil || toRow  == nil || toColumn == nil){
+            print("Invalid coordinates")
+        } else {
+            move = Move(owner: .player1, fromRow: fromRow!, fromColumn: fromColumn!, toRow: toRow!, toColumn: toColumn!)
+            isValid = rules.isMoveValid(board: board, move: move!)
         }
     }
     return move
@@ -95,14 +97,24 @@ var result : (Bool,Result) = (false, .notFinished)
 
 while(result.0 == false){
     let currentPlayer : Owner = rules.getNextPlayer()
+    var combat = false
+    var resEatPiece: BoardResult? = nil
     print(board)
     if (currentPlayer == .player1){
         print("\(randomPlayer.name)' turn")
         if let move : Move = randomPlayer.chooseMove(in: board, with: rules){
             let beforeBoard = board
+            if (board.grid[move.toRow][move.toColumn].piece != nil){
+                combat = true
+                resEatPiece = board.removePiece(atRow: move.toRow, andColumn: move.toColumn)
+            }
+            
             let resInsert : BoardResult =  board.insert(piece: board.grid[move.fromRow][move.fromColumn].piece!, atRow: move.toRow, andColumn: move.toColumn)
             let resRemove : BoardResult = board.removePiece(atRow: move.fromRow, andColumn: move.fromColumn)
-            if(resInsert == .ok && resRemove == .ok){
+            
+            let resEat : BoardResult = {if combat == false { .ok } else { resEatPiece! } }()
+            
+            if(resInsert == .ok && resRemove == .ok && resEat == .ok ) {
                 rules.playedMove(move: move, boardBeforeMove: beforeBoard, boardAfterMove: board)
                 result = rules.isGameOver(board: board, row: move.toRow, column: move.toColumn)
                 print("\(randomPlayer.name) played \(move)")
@@ -117,6 +129,10 @@ while(result.0 == false){
         print("\(humanPlayer.name)' turn")
         if let move : Move = humanPlayer.chooseMove(in: board, with: rules){
             let beforeBoard = board
+            if (board.grid[move.toRow][move.toColumn].piece != nil){
+                combat = true
+                resEatPiece = board.removePiece(atRow: move.toRow, andColumn: move.toColumn)
+            }
             let resInsert : BoardResult =  board.insert(piece: board.grid[move.fromRow][move.fromColumn].piece!, atRow: move.toRow, andColumn: move.toColumn)
             let resRemove : BoardResult = board.removePiece(atRow: move.fromRow, andColumn: move.fromColumn)
             if(resInsert == .ok && resRemove == .ok){
