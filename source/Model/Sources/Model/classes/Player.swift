@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Player {
+public class Player : CustomStringConvertible {
     public var id : Owner
     public var name: String
     
@@ -22,5 +22,13 @@ public class Player {
     public func chooseMove(in board: Board, with rules: Rules) -> Move?{
         // What should I do here ???
         return nil
+    }
+    
+    public var description: String{
+        switch id {
+            case .player1: return "Player 🟡 1 \(name)"
+            case .player2: return "Player 🔴 2 \(name)"
+            case .noOne: return "x"
+        }
     }
 }

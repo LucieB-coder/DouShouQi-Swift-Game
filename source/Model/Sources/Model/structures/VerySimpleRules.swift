@@ -114,7 +114,13 @@ public struct VerySimpleRules : Rules {
     }
     
     public func getNextPlayer() -> Owner {
-        return historic.last?.owner == .player1 ? .player2 : .player1
+        if let lastPlayer = historic.last?.owner {
+            if ( lastPlayer == .player1 ) {
+                return .player2
+            }
+            return .player1
+        }
+        return .player1 
     }
     
     public func getMoves(board: Board, owner: Owner) -> [Move] {

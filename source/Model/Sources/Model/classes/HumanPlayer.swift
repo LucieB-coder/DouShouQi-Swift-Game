@@ -16,7 +16,8 @@ public class HumanPlayer: Player {
     }
 
     public override func chooseMove(in board: Board, with rules: Rules) -> Move? {
-        return input()
+        let move : Move? = input()
+        return move
     }
 }
 
