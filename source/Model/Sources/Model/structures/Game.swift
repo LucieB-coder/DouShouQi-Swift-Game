@@ -100,11 +100,13 @@ public struct Game {
             move!.owner = currentPlayer.id
         }
         while(move == nil || rules.isMoveValid(board: board, move: move!) == false){
-            
             //Invalid move notification
             if let invalidMove : () -> Void = onInvalidMove { invalidMove() }
             
             move = currentPlayer.chooseMove(in: board, with: rules)
+            if (move != nil){
+                move!.owner = currentPlayer.id
+            }
         }
         return move!
     }
