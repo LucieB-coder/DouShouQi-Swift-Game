@@ -38,6 +38,7 @@ public struct Game {
     public mutating func setOnPlayersTurn(onPlayersTurnHandler playersTurn : @escaping (Player) -> Void ){
         onPlayersTurn = playersTurn
     }
+    
     public mutating func setOnInvalidMove(onInvalidMove invalidMove : @escaping () -> Void ){
         onInvalidMove = invalidMove
     }
@@ -54,7 +55,7 @@ public struct Game {
         onBoardChanged = boardChanged
     }
     
-    // Start function method
+    // Method initiating the game cicle
     mutating public func start() {
         
         var currentPlayer : Player = rules.getNextPlayer() == .player1 ? player1 : player2
@@ -68,26 +69,20 @@ public struct Game {
             
             // Player starts its turn notification
             if let playersTurn : (Player) -> Void = onPlayersTurn { playersTurn(currentPlayer) }
+            // Make the player choose a valid move
+            let move : Move = chooseAValidMove(currentPlayer: currentPlayer)
             
-            var move : Move? = currentPlayer.chooseMove(in: board, with: rules)
-            while(move == nil || rules.isMoveValid(board: board, move: move!) == false){
-                
-                //Invalid move notification
-                if let invalidMove : () -> Void = onInvalidMove { invalidMove() }
-                
-                move = currentPlayer.chooseMove(in: board, with: rules)
-            }
             // Player played move notification
-            if let playerMadeMove : (Move,Player) -> Void = onPlayerMadeMove { playerMadeMove(move!,currentPlayer) }
+            if let playerMadeMove : (Move,Player) -> Void = onPlayerMadeMove { playerMadeMove(move,currentPlayer) }
             
             let beforeMoveBoard : Board = board
-            playMove(board: board, move: move!)
-            rules.playedMove(move: move!, boardBeforeMove: beforeMoveBoard, boardAfterMove: board)
+            playMove(board: board, move: move)
+            rules.playedMove(move: move, boardBeforeMove: beforeMoveBoard, boardAfterMove: board)
             
             // Board changed notification
             if let boardChanged : (Board) -> Void = onBoardChanged { boardChanged(board) }
             
-            gameResult = rules.isGameOver(board: board, row: move!.toRow, column: move!.toColumn)
+            gameResult = rules.isGameOver(board: board, row: move.toRow, column: move.toColumn)
             
             // turnEnds Notification
             if let turnEnds : (Result) -> Void = onTurnEnds { turnEnds(gameResult.1) }
@@ -97,6 +92,23 @@ public struct Game {
         
     }
     
+    // Method asking the player to choose a move and check if it is valid
+    mutating private func chooseAValidMove (currentPlayer : Player) -> Move {
+        var move : Move? = currentPlayer.chooseMove(in: board, with: rules)
+        if (move != nil){
+            move!.owner = currentPlayer.id
+        }
+        while(move == nil || rules.isMoveValid(board: board, move: move!) == false){
+            
+            //Invalid move notification
+            if let invalidMove : () -> Void = onInvalidMove { invalidMove() }
+            
+            move = currentPlayer.chooseMove(in: board, with: rules)
+        }
+        return move!
+    }
+    
+    // Method updating the board after we ensure that the move is valid
     mutating private func playMove (board: Board, move : Move) {
         if (board.grid[move.toRow][move.toColumn].piece != nil){
             self.board.removePiece(atRow: move.toRow, andColumn: move.toColumn)

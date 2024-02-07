@@ -9,4 +9,6 @@ import Foundation
 
 public enum GameError {
     case invalidMove
+    case nextPlayerError
+    case badPlayerId(id: String)
 }
