@@ -99,15 +99,19 @@ public struct Game {
         if (move != nil){
             move!.owner = currentPlayer.id
         }
-        while(move == nil || rules.isMoveValid(board: board, move: move!) == false){
-            //Invalid move notification
-            if let invalidMove : () -> Void = onInvalidMove { invalidMove() }
-            
-            move = currentPlayer.chooseMove(in: board, with: rules)
-            if (move != nil){
-                move!.owner = currentPlayer.id
+        do{
+            while(try rules.isMoveValid(board: board, move: move!) == false || move == nil){
+                //Invalid move notification
+                if let invalidMove : () -> Void = onInvalidMove { invalidMove() }
+                
+                move = currentPlayer.chooseMove(in: board, with: rules)
+                if (move != nil){
+                    move!.owner = currentPlayer.id
+                }
             }
-        }
+        }catch GameError.invalidMove {
+        }catch{}
+        
         return move!
     }
     

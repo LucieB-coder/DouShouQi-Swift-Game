@@ -154,24 +154,30 @@ public struct VerySimpleRules : Rules {
 
             let newMove = Move(owner: owner, fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn)!
 
-            if isMoveValid(board: board, move: newMove) {
-                validMoves.append(newMove)
-            }
+            do {
+                if try isMoveValid(board: board, move: newMove) {
+                    validMoves.append(newMove)
+                }
+            } catch {}
         }
 
         return validMoves
     }
     
-    public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool {
+    public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) throws -> Bool {
 
         let currentPlayer: Owner = getNextPlayer()
         let move : Move = Move(owner: currentPlayer, fromRow: fromRow, fromColumn: fromColumn, toRow: toRow, toColumn: toColumn)!
-        return isMoveValid(board: board, move: move)
+        do{
+            return try isMoveValid(board: board, move: move)
+        } catch GameError.invalidMove {
+            throw GameError.invalidMove
+        }
 
     }
     
     
-    public func isMoveValid(board: Board, move: Move) -> Bool {
+    public func isMoveValid(board: Board, move: Move) throws -> Bool  {
         let currentPlayer: Owner = move.owner
         
         // Check if the move is doesn't make a piece stay where it is
@@ -289,8 +295,11 @@ public struct VerySimpleRules : Rules {
     }
     
     public mutating func playedMove(move: Move, boardBeforeMove: Board, boardAfterMove: Board) {
-        self.occurences.updateValue((self.occurences[boardAfterMove] ?? 0 )+1, forKey: boardAfterMove)
-        self.historic.append(move)
-        return
+        do{
+            if try isMoveValid(board: boardBeforeMove, move: move){
+                self.historic.append(move)
+            }
+        } catch GameError.invalidMove {}
+        catch{}
     }
 }
