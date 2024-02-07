@@ -1,15 +1,12 @@
 # DouShouQi-SwiftGame
 
 This project is a DouShouQi command line game coded in swift and usable in your terminal.
-So far, only the board of the game is coded, the rest will follow soon.
 
 To launch the project, open the `xcworkspace` file in XCode and run the project `DouShouQi_CLI`.
 
-Here is Mr Chevaldonné' citerias table with a check of everything i did for this TP
-
 ## Commit for correction
 
-To evaluate my work, you can base yourself on the last commit of the branch `tp4`
+To evaluate my work, you can base yourself on the last commit of the branch `tp5`
 
 
 ## Project and Packages
@@ -25,18 +22,30 @@ Package `ModelEmojiDisplayer`: Model extensions to improve the display of the bo
 
 To be able to launch the project, you have to clone this repo and open it in XCode.
 
-If you want to **play a game against a randomPlayer**, you have to select `DouShouQi_CLI` and build the project.
+If you want to **play a game**, you have to build the Model, then the EmojiDisplayer and finally select and start the project`DouShouQi_CLI`.
 
-You will be able to play a game against a randomPlayer (bot that is playing a random valid move) on a simplified board (the real board will come soon I hope)
+You will be able to create the players of the game between two kinds of Player, humanPlayer (you will manually type your moves) and randomPlayer (bot that is playing a random valid move) on a simplified board (the real board will come soon I hope).
 
-If you want to **launch the unit and performance tests**, select the package `Model` in the Scheme menu, edit the scheme to `Test` and run them. `Model` is 100% covered by the tests.
+If you want to **launch the unit and performance tests**, select the package `Model` and in the Scheme menu, edit the scheme to `Test` and run `Model`.
 
 
-## Diagramm class
+## class Diagramm
 
 ```mermaid
 	classDiagram
 	direction LR
+	class Game {
+		<<struct>>
+		+board : Board
+		+player1 : Player
+		+player2 : Player
+		+rules : Rules
+		+init(Rules,Player,Player)
+		+start()
+	}
+
+	Game ..> GameError
+
 	class Board {
 		<<struct>>
 		+nbRows : Int
@@ -158,24 +167,37 @@ If you want to **launch the unit and performance tests**, select the package `Mo
 	
 Here is Mr Chevaldonné' citerias table filled with my auto evaluation on everything I did for this TP, so that you can follow my progress.
 
-niveau | description | status | coeff | pénalités TP5 | pénalités TP6  
---- | --- | --- | --- | --- | ---
-☢️ | Le dépôt doit être accessible par l'enseignant |✅ | ☢️ 
-☢️ | un .gitignore doit exister au premier push |✅ | ☢️
-🎬 | les *Packages* et le test compilent |✅ | 1 | 50% | 75%
-🎬 | le test et les tests unitaires s'exécutent sans bug || 2 | 50% | 75%
-1️⃣ | j'ai créé la classe ```Player``` |✅ | 1 | 50% | 75%
-1️⃣ | j'ai créé la classe ```RandomPlayer``` |✅ | 1 | 50% | 75%
-1️⃣ | j'ai créé la classe ```HumanPlayer``` |✅ | 2 | 50% | 75%
-1️⃣ | j'ai ajouté l'injection de dépendance pour la saisie dans ```HumanPlayer``` |✅ | 4 | 50% | 75%
-2️⃣ | j'ai écrit les tests unitaires pour ```RandomPlayer``` |✅ | 2 | 50% | 75%
-2️⃣ | j'ai écrit les tests unitaires pour ```HumanPlayer``` | ✅ |3 | 50% | 75%
-1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```RandomPlayer``` dans une boucle de jeu |✅| 3 | 50% | 75%
-1️⃣ | j'ai testé dans une application en lignes de commande l'injection d'une méthode de saisie pour ```HumanPlayer``` |✅| 2 | 50% | 75%
-1️⃣ | j'ai testé dans une application en lignes de commande l'utilisation de ```HumanPlayer``` dans une boucle de jeu | ✅|2 | 50% | 75%
-3️⃣ | ma couverture de tests pour *Model* dépasse les 90% |✅ | 2 | 50% | 75%
-3️⃣ | mon dépôt possède un readme qui apporte quelque chose... | ✅ |1 | 50% | 75%
-3️⃣ | mon code est commenté |✅| 1   | 50% | 75%
-🎉 | j'ai ajouté une IA || - | 50% | 75%
+niveau | description | coeff  | status | pénalités TP6  
+--- | --- | --- | --- | ---
+☢️ | Le dépôt doit être accessible par l'enseignant | ☢️ |✅| 
+☢️ | un .gitignore doit exister au premier push | ☢️  |✅|
+🎬 | les *Packages* et le test compilent | 1 |✅| 50%  
+🎬 | le test et les tests unitaires s'exécutent sans bug | 2 |✅| 50%  
+1️⃣ | j'ai enrichi l'enum ```GameError``` | 1 |🔴| 50% | 75%
+1️⃣ | j'ai créé la structure ```Game```, ses membres et son initialiseur | 1 |✅| 50%  
+1️⃣ | j'ai ajouté la fonction ```start()``` et géré la boucle de jeu | 6 |✅| 50%  
+1️⃣ | j'ai ajouté la notification sur le démarrage du jeu | 1 |✅| 50%  
+1️⃣ | j'ai abonné une méthode à la notification sur le démarrage du jeu | 1 |✅| 50%  
+1️⃣ | j'ai testé la notification sur le démarrage du jeu | 1 |✅| 50%  
+1️⃣ | j'ai ajouté la notification indiquant quel est le prochain joueur | 2 |✅| 50%   
+1️⃣ | j'ai abonné une méthode à la notification indiquant quel est le prochain joueur | 2 |✅| 50%  
+1️⃣ | j'ai testé la notification indiquant quel est le prochain joueur | 2 |✅| 50%  
+1️⃣ | j'ai ajouté la notification donnant des informations sur la fin de partie (partie en cours, terminée, vainqueur...) | 4 |✅| 50%  
+1️⃣ | j'ai abonné une méthode à la notification donnant des informations sur la fin de partie (partie en cours, terminée, vainqueur...) | 4 |✅| 50%  
+1️⃣ | j'ai testé la notification donnant des informations sur la fin de partie (partie en cours, terminée, vainqueur...) | 4 |✅| 50%  
+2️⃣ | j'ai ajouté la notification indiquant que le plateau de jeu a changé | 1 |✅| 50%  
+2️⃣ | j'ai abonné une méthode à la notification indiquant que le plateau de jeu a changé | 1 |✅| 50%  
+2️⃣ | j'ai testé la notification indiquant que le plateau de jeu a changé | 1 |✅| 50%  
+3️⃣ | j'ai ajouté la notification indiquant quel coup a été choisi | 1 |✅| 50%  
+3️⃣ | j'ai abonné une méthode à la notification indiquant quel coup a été choisi | 1 |✅| 50%  
+3️⃣ | j'ai testé la notification indiquant quel coup a été choisi | 1 |✅| 50%  
+3️⃣ | j'ai ajouté la notification indiquant que le coup choisi n'est pas valide | 1 |✅| 50%  
+3️⃣ | j'ai abonné une méthode à la notification indiquant que le coup choisi n'est pas valide | 1 |✅| 50%  
+3️⃣ | j'ai testé la notification indiquant que le coup choisi n'est pas valide | 1 |✅| 50%  
+2️⃣ | mon test permet de lancer une partie entre deux joueurs aléatoires | 1 |✅| 50%  
+2️⃣ | mon test permet de lancer une partie entre un joueur aléatoire et un joueur humain | 4 |✅| 50%  
+2️⃣ | mon test permet de lancer une partie entre deux joueurs humains | 4 |✅| 50%  
+3️⃣ | mon dépôt possède un readme qui apporte quelque chose... | 2 |🚧| 50%  
+3️⃣ | mon code est commenté | 1 |🚧| 50% 
 
 Enjoy the game 🎉.
