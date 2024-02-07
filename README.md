@@ -29,7 +29,7 @@ You will be able to create the players of the game between two kinds of Player, 
 If you want to **launch the unit and performance tests**, select the package `Model` and in the Scheme menu, edit the scheme to `Test` and run `Model`.
 
 
-## class Diagramm
+## Model class diagram
 
 ```mermaid
 	classDiagram
