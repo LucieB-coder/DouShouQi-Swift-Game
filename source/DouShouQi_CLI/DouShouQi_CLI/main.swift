@@ -72,17 +72,17 @@ func inputPlayers(humanInputMethod : @escaping () -> Move?) -> (Player, Player) 
 }
 
 let rules : Rules = VerySimpleRules()
-let (player1, player2) = inputPlayers(humanInputMethod: inputMethod)
-var game : Game = Game(withRules: rules, andPlayer1: player1, andPlayer2: player2)
-
+//let (player1, player2) = inputPlayers(humanInputMethod: inputMethod)
+//var game : Game = Game(withRules: rules, andPlayer1: player1, andPlayer2: player2)
+/*
 game.onGameStart = gameStartsDisplayer
 game.onPlayersTurn = playersTurnDisplayer
 game.onInvalidMove = invalidMoveDisplayer
 game.onPlayerMadeMove = playerMadeMoveDisplayer
 game.onBoardChanged = boardChangedDisplayer
 game.onTurnEnds = turnEndsDisplayer
-
-game.start()
+ */
+//game.start()
 
 func gameStartsDisplayer(board : Board) {
     print("**************************************")
@@ -130,4 +130,53 @@ func turnEndsDisplayer(result : Result) {
         print(winningReason)
         print("**************************************\n")
     }
+}
+
+
+// --------------------------------------------------------------------------------- //
+// --------------------------------- Encode tests ---------------------------------- //
+// --------------------------------------------------------------------------------- //
+
+let animal : Animal = .rat
+JSONFileManager.save(object: animal, to: "myRat.json")
+
+let cellType : CellType = .water
+JSONFileManager.save(object: cellType, to: "myCellType.json")
+
+let owner : Owner = .player1
+JSONFileManager.save(object: owner, to: "myOwner.json")
+
+let piece : Piece = Piece(owner: .player2, animal: .cat)
+JSONFileManager.save(object: piece, to: "myPiece.json")
+
+// --------------------------------------------------------------------------------- //
+// --------------------------------- Decode tests ---------------------------------- //
+// --------------------------------------------------------------------------------- //
+
+if let loadedAnimal : Animal = JSONFileManager.load(from: "myRat.json", as: Animal.self){
+    print(loadedAnimal)
+}
+else {
+    print("invalid animal value")
+}
+
+if let loadedCellType : CellType = JSONFileManager.load(from: "myCellType.json", as: CellType.self){
+    print(loadedCellType)
+}
+else {
+    print("invalid cell type value")
+}
+
+if let loadedOwner : Owner = JSONFileManager.load(from: "myOwner.json", as: Owner.self){
+    print(loadedOwner)
+}
+else {
+    print("invalid owner value")
+}
+
+if let loadedPiece : Piece = JSONFileManager.load(from: "myPiece.json", as: Piece.self){
+    print(loadedPiece)
+}
+else {
+    print("invalid piece")
 }
