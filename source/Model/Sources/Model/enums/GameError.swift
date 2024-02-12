@@ -7,6 +7,8 @@
 
 import Foundation
 
-public enum GameError {
+public enum GameError : Error {
     case invalidMove
+    case nextPlayerError
+    case badPlayerId(id: String)
 }

@@ -14,8 +14,8 @@ public protocol Rules {
     static func createBoard() -> Board
     static func checkBoard(b:Board) throws
     func getNextPlayer() -> Owner
-    func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool
-    func isMoveValid(board: Board, move: Move) -> Bool
+    func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) throws -> Bool
+    func isMoveValid(board: Board, move: Move) throws -> Bool
     func getMoves(board: Board, owner:Owner, fromRow: Int, fromColumn: Int) -> [Move]
     func getMoves(board: Board, owner:Owner) -> [Move]
     func isGameOver(board: Board, row: Int, column: Int) -> (Bool, Result)
