@@ -6,30 +6,27 @@
 //
 
 import Foundation
+import Model
 
 extension Animal: Codable {
     
-    private enum CodingKeys: String, CodingKey {
-        case animal
-    }
-    
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.singleValueContainer()
         switch self {
-        case .rat: try container.encode("rat", forKey: .animal)
-        case .cat: try container.encode("cat", forKey: .animal)
-        case .dog: try container.encode("dog", forKey: .animal)
-        case .wolf: try container.encode("wolf", forKey: .animal)
-        case .leopard: try container.encode("leopard", forKey: .animal)
-        case .tiger: try container.encode("tiger", forKey: .animal)
-        case .lion: try container.encode("lion", forKey: .animal)
-        case .elephant: try container.encode("elephant", forKey: .animal)
+        case .rat: try container.encode("rat")
+        case .cat: try container.encode("cat")
+        case .dog: try container.encode("dog")
+        case .wolf: try container.encode("wolf")
+        case .leopard: try container.encode("leopard")
+        case .tiger: try container.encode("tiger")
+        case .lion: try container.encode("lion")
+        case .elephant: try container.encode("elephant")
         }
     }
     
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let animalString = try container.decode(String.self, forKey: .animal)
+        let container = try decoder.singleValueContainer()
+        let animalString = try container.decode(String.self)
         switch animalString {
         case "rat": self = .rat
         case "cat": self = .cat
@@ -40,7 +37,7 @@ extension Animal: Codable {
         case "lion": self = .lion
         case "elephant": self = .elephant
         default:
-            throw DecodingError.dataCorruptedError(forKey: .animal, in: container, debugDescription: "Unknown animal")
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown animal")
         }
     }
 }

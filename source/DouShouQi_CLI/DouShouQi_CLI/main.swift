@@ -138,45 +138,122 @@ func turnEndsDisplayer(result : Result) {
 // --------------------------------------------------------------------------------- //
 
 let animal : Animal = .rat
-JSONFileManager.save(object: animal, to: "myRat.json")
+JSONFileManager.save(object: animal, to: "Rat.json")
 
 let cellType : CellType = .water
-JSONFileManager.save(object: cellType, to: "myCellType.json")
+JSONFileManager.save(object: cellType, to: "CellType.json")
 
 let owner : Owner = .player1
-JSONFileManager.save(object: owner, to: "myOwner.json")
+JSONFileManager.save(object: owner, to: "Owner.json")
 
 let piece : Piece = Piece(owner: .player2, animal: .cat)
-JSONFileManager.save(object: piece, to: "myPiece.json")
+JSONFileManager.save(object: piece, to: "Piece.json")
+
+let move : Move = Move(owner: .player2, fromRow: 1, fromColumn: 1, toRow: 1, toColumn: 1)!
+JSONFileManager.save(object: move, to: "Move.json")
+
+let cell : Cell = Cell(cellType: .den, initialOwner: .player1, piece: piece)
+JSONFileManager.save(object: cell, to: "Cell.json")
+
+let board : Board = Board(grid: [
+    [Cell(cellType: .jungle),
+     Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .lion)),
+     Cell(cellType: .den, initialOwner: .player1),
+     Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .tiger)),
+     Cell(cellType: .jungle)],
+
+    [Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .rat)),
+     Cell(cellType: .jungle),
+     Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .cat)),
+     Cell(cellType: .jungle),
+     Cell(cellType: .jungle, initialOwner: .player1, piece: Piece(owner: .player1, animal: .elephant))],
+    
+    [Cell(cellType: .jungle),
+     Cell(cellType: .jungle),
+     Cell(cellType: .jungle),
+     Cell(cellType: .jungle),
+     Cell(cellType: .jungle),],
+    
+    [Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .elephant)),
+     Cell(cellType: .jungle),
+     Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .cat)),
+     Cell(cellType: .jungle),
+     Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .rat))],
+    
+    [Cell(cellType: .jungle),
+     Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .tiger)),
+     Cell(cellType: .den, initialOwner: .player2),
+     Cell(cellType: .jungle, initialOwner: .player2, piece: Piece(owner: .player2, animal: .lion)),
+     Cell(cellType: .jungle)],
+     
+])!
+JSONFileManager.save(object: board, to: "Board.json")
+
+let rulesToEncode : Rules = VerySimpleRules()
+let codableRules : CodableRules = CodableRules(rule : rulesToEncode)
+JSONFileManager.save(object: codableRules, to: "Rules.json")
+
 
 // --------------------------------------------------------------------------------- //
 // --------------------------------- Decode tests ---------------------------------- //
 // --------------------------------------------------------------------------------- //
 
-if let loadedAnimal : Animal = JSONFileManager.load(from: "myRat.json", as: Animal.self){
+if let loadedAnimal : Animal = JSONFileManager.load(from: "Rat.json", as: Animal.self){
     print(loadedAnimal)
 }
 else {
     print("invalid animal value")
 }
 
-if let loadedCellType : CellType = JSONFileManager.load(from: "myCellType.json", as: CellType.self){
+if let loadedCellType : CellType = JSONFileManager.load(from: "CellType.json", as: CellType.self){
     print(loadedCellType)
 }
 else {
     print("invalid cell type value")
 }
 
-if let loadedOwner : Owner = JSONFileManager.load(from: "myOwner.json", as: Owner.self){
+if let loadedOwner : Owner = JSONFileManager.load(from: "Owner.json", as: Owner.self){
     print(loadedOwner)
 }
 else {
     print("invalid owner value")
 }
 
-if let loadedPiece : Piece = JSONFileManager.load(from: "myPiece.json", as: Piece.self){
+if let loadedPiece : Piece = JSONFileManager.load(from: "Piece.json", as: Piece.self){
     print(loadedPiece)
 }
 else {
     print("invalid piece")
+}
+
+if let loadedMove : Move = JSONFileManager.load(from: "Move.json", as: Move.self){
+    print(loadedMove)
+}
+else {
+    print("invalid move")
+}
+
+if let loadedCell : Cell = JSONFileManager.load(from: "Cell.json", as: Cell.self){
+    print(loadedCell)
+}
+else {
+    print("invalid cell")
+}
+
+
+if let loadedBoard : Board = JSONFileManager.load(from: "Board.json", as: Board.self){
+    print(loadedBoard)
+}
+else {
+    print("invalid board")
+}
+
+let decodedRules : CodableRules = JSONFileManager.load(from: "Rules.json", as: CodableRules.self)!
+print("decodedrules type : \(decodedRules.rulesType)")
+let loadedRules : Rules = decodedRules.initRules()!
+if let simpleRules : VerySimpleRules = loadedRules as? VerySimpleRules {
+    print("Very simple rules loaded succesfully")
+}
+else {
+    print("invalid rules")
 }

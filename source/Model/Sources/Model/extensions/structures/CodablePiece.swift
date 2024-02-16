@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Model
 
 extension Piece: Codable {
     private enum CodingKeys: String, CodingKey {
@@ -15,8 +16,9 @@ extension Piece: Codable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.owner = try container.decode(Owner.self, forKey: .owner)
-        self.animal = try container.decode(Animal.self, forKey: .animal)
+        let owner : Owner = try container.decode(Owner.self, forKey: .owner)
+        let animal: Animal = try container.decode(Animal.self, forKey: .animal)
+        self.init(owner: owner, animal: animal)
     }
 
     public func encode(to encoder: Encoder) throws {

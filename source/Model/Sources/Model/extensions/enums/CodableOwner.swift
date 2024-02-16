@@ -6,30 +6,28 @@
 //
 
 import Foundation
+import Model
 
 extension Owner : Codable {
-    private enum CodingKeys: String, CodingKey {
-        case owner
-    }
     
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.singleValueContainer()
         switch self {
-        case .player1: try container.encode("player1", forKey: .owner)
-        case .player2: try container.encode("player2", forKey: .owner)
-        case .noOne: try container.encode("noOne", forKey: .owner)
+        case .player1: try container.encode("player1")
+        case .player2: try container.encode("player2")
+        case .noOne: try container.encode("noOne")
         }
     }
     
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let ownerString = try container.decode(String.self, forKey: .owner)
+        let container = try decoder.singleValueContainer()
+        let ownerString = try container.decode(String.self)
         switch ownerString {
         case "player1": self = .player1
         case "player2": self = .player2
         case "noOne": self = .noOne
         default:
-            throw DecodingError.dataCorruptedError(forKey: .owner, in: container, debugDescription: "Unknown owner")
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown owner")
         }
     }
 }

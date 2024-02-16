@@ -6,26 +6,24 @@
 //
 
 import Foundation
+import Model
 
 extension CellType : Codable {
-    private enum CodingKeys: String, CodingKey {
-        case cellType
-    }
     
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.singleValueContainer()
         switch self {
-        case .water: try container.encode("water", forKey: .cellType)
-        case .trap: try container.encode("trap", forKey: .cellType)
-        case .den: try container.encode("den", forKey: .cellType)
-        case .jungle: try container.encode("jungle", forKey: .cellType)
-        case .unknown: try container.encode("unknown", forKey: .cellType)
+        case .water: try container.encode("water")
+        case .trap: try container.encode("trap")
+        case .den: try container.encode("den")
+        case .jungle: try container.encode("jungle")
+        case .unknown: try container.encode("unknown")
         }
     }
     
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let cellTypeString = try container.decode(String.self, forKey: .cellType)
+        let container = try decoder.singleValueContainer()
+        let cellTypeString = try container.decode(String.self)
         switch cellTypeString {
         case "water": self = .water
         case "trap": self = .trap
@@ -33,7 +31,7 @@ extension CellType : Codable {
         case "jungle": self = .jungle
         case "unknown": self = .unknown
         default:
-            throw DecodingError.dataCorruptedError(forKey: .cellType, in: container, debugDescription: "Unknown cellType")
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown cellType")
         }
     }
 }
