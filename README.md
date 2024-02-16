@@ -6,7 +6,7 @@ To launch the project, open the `xcworkspace` file in XCode and run the project 
 
 ## Commit for correction
 
-To evaluate my work, you can base yourself on the last commit of the branch `tp5`
+To evaluate my work, you can base yourself on the last commit of the branch `tp6`
 
 
 ## Project and Packages
@@ -163,41 +163,5 @@ If you want to **launch the unit and performance tests**, select the package `Mo
 	
 ```
 
-## Progress
-	
-Here is Mr Chevaldonné' citerias table filled with my auto evaluation on everything I did for this TP, so that you can follow my progress.
-
-niveau | description | coeff  | status | pénalités TP6  
---- | --- | --- | --- | ---
-☢️ | Le dépôt doit être accessible par l'enseignant | ☢️ |✅| 
-☢️ | un .gitignore doit exister au premier push | ☢️  |✅|
-🎬 | les *Packages* et le test compilent | 1 |✅| 50%  
-🎬 | le test et les tests unitaires s'exécutent sans bug | 2 |✅| 50%  
-1️⃣ | j'ai enrichi l'enum ```GameError``` | 1 |🔴| 50% | 75%
-1️⃣ | j'ai créé la structure ```Game```, ses membres et son initialiseur | 1 |✅| 50%  
-1️⃣ | j'ai ajouté la fonction ```start()``` et géré la boucle de jeu | 6 |✅| 50%  
-1️⃣ | j'ai ajouté la notification sur le démarrage du jeu | 1 |✅| 50%  
-1️⃣ | j'ai abonné une méthode à la notification sur le démarrage du jeu | 1 |✅| 50%  
-1️⃣ | j'ai testé la notification sur le démarrage du jeu | 1 |✅| 50%  
-1️⃣ | j'ai ajouté la notification indiquant quel est le prochain joueur | 2 |✅| 50%   
-1️⃣ | j'ai abonné une méthode à la notification indiquant quel est le prochain joueur | 2 |✅| 50%  
-1️⃣ | j'ai testé la notification indiquant quel est le prochain joueur | 2 |✅| 50%  
-1️⃣ | j'ai ajouté la notification donnant des informations sur la fin de partie (partie en cours, terminée, vainqueur...) | 4 |✅| 50%  
-1️⃣ | j'ai abonné une méthode à la notification donnant des informations sur la fin de partie (partie en cours, terminée, vainqueur...) | 4 |✅| 50%  
-1️⃣ | j'ai testé la notification donnant des informations sur la fin de partie (partie en cours, terminée, vainqueur...) | 4 |✅| 50%  
-2️⃣ | j'ai ajouté la notification indiquant que le plateau de jeu a changé | 1 |✅| 50%  
-2️⃣ | j'ai abonné une méthode à la notification indiquant que le plateau de jeu a changé | 1 |✅| 50%  
-2️⃣ | j'ai testé la notification indiquant que le plateau de jeu a changé | 1 |✅| 50%  
-3️⃣ | j'ai ajouté la notification indiquant quel coup a été choisi | 1 |✅| 50%  
-3️⃣ | j'ai abonné une méthode à la notification indiquant quel coup a été choisi | 1 |✅| 50%  
-3️⃣ | j'ai testé la notification indiquant quel coup a été choisi | 1 |✅| 50%  
-3️⃣ | j'ai ajouté la notification indiquant que le coup choisi n'est pas valide | 1 |✅| 50%  
-3️⃣ | j'ai abonné une méthode à la notification indiquant que le coup choisi n'est pas valide | 1 |✅| 50%  
-3️⃣ | j'ai testé la notification indiquant que le coup choisi n'est pas valide | 1 |✅| 50%  
-2️⃣ | mon test permet de lancer une partie entre deux joueurs aléatoires | 1 |✅| 50%  
-2️⃣ | mon test permet de lancer une partie entre un joueur aléatoire et un joueur humain | 4 |✅| 50%  
-2️⃣ | mon test permet de lancer une partie entre deux joueurs humains | 4 |✅| 50%  
-3️⃣ | mon dépôt possède un readme qui apporte quelque chose... | 2 |🚧| 50%  
-3️⃣ | mon code est commenté | 1 |🚧| 50% 
 
 Enjoy the game 🎉.
